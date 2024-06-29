@@ -30,4 +30,30 @@ class CategoryJdbcRepositoryTest {
         assertEquals(5, categoryList.size());
     }
 
+    @Test
+    void shouldAdd(){
+        Category category = new Category();
+        category.setCategoryId(0);
+        category.setName("Testing");
+        Category expected = repository.add(category);
+        assertEquals(category.getName(), expected.getName());
+    }
+
+    @Test
+    void shouldUpdate(){
+        Category c = repository.findAll().stream().findFirst().orElse(null);
+        c.setName("Testing");
+        boolean expected = repository.update(c);
+        assertTrue(expected);
+        c = repository.findAll().stream().findFirst().orElse(null);
+        assertEquals("Testing", c.getName());
+
+    }
+
+    @Test
+    void shouldDelete(){
+        boolean expected = repository.deletedById(6);
+        assertTrue(expected);
+    }
+
 }

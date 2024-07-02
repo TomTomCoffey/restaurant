@@ -8,6 +8,7 @@ public class Modifiers {
     private BigDecimal price;
     private boolean disabled;
 
+
     public Modifiers(){}
 
     public Modifiers(int modifier_id, String name, BigDecimal price, boolean disabled) {
@@ -47,5 +48,15 @@ public class Modifiers {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Modifiers{" +
+                "modifier_id=" + modifier_id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", disabled=" + disabled +
+                '}';
     }
 }

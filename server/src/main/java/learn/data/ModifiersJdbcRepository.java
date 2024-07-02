@@ -43,9 +43,9 @@ public class ModifiersJdbcRepository implements ModifiersRepository {
                 "FROM modifiers m " +
                 "JOIN submodifier sb ON m.modifier_id = sb.modifier_id " +
                 "JOIN item i ON sb.item_id = i.item_id " +
-                "WHERE i.item_id = 3;";
+                "WHERE i.item_id = ?;";
 
-        return jdbcTemplate.query(sql,  new ModifiersMapper());
+        return jdbcTemplate.query(sql,  new ModifiersMapper(), itemId);
     }
 
     @Override

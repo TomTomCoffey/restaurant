@@ -9,9 +9,9 @@ public interface ItemRepository {
 
     public List<Item> findAll();
 
-    public Item findById();
+    public Item findById(int itemId);
 
-    public List<Item> findByCategory();
+    public List<Item> findByCategory(Category category);
 
     public Item add(Item item);
 

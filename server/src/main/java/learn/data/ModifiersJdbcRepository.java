@@ -76,8 +76,8 @@ public class ModifiersJdbcRepository implements ModifiersRepository {
     @Override
     public boolean update(Modifiers modifiers) {
         final String sql = "UPDATE modifiers SET " +
-                " modifier_name = ? " +
-                " modifier_price = ? " +
+                " modifier_name = ?, " +
+                " modifier_price = ?, " +
                 " modifier_disabled = ? " +
                 " WHERE modifier_id = ?; ";
 

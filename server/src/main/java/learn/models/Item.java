@@ -16,6 +16,20 @@ public class Item {
 
     public Item(){}
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemId=" + itemId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", photo='" + photo + '\'' +
+                ", category=" + category +
+                ", modifiers=" + modifiers +
+                ", disabled=" + disabled +
+                "}\n";
+    }
+
     public Item(int itemId, String title, String description,
                 BigDecimal price, String photo, Category category,
                 List<Modifiers> modifiers, boolean disabled) {

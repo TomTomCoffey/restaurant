@@ -29,6 +29,7 @@ public class ItemJdbcRepository implements ItemRepository {
                 "    item_description, " +
                 "    item_price, " +
                 "    item_disabled, " +
+                "    item_photo, " +
                 "    category_id " +
                 "FROM item;";
 
@@ -43,17 +44,57 @@ public class ItemJdbcRepository implements ItemRepository {
 
     @Override
     public Item findById(int itemId) {
-        return null;
+
+        final String sql = "SELECT " +
+                " item_id," +
+                "    item_title, " +
+                "    item_description, " +
+                "    item_price, " +
+                "    item_disabled, " +
+                "    item_photo, " +
+                "    category_id " +
+                "FROM item " +
+                " WHERE item_id = ?; ";
+
+        Item item = jdbcTemplate.query(sql, new ItemMapper(), itemId).stream().findFirst().orElse(null);
+        fillFields(item);
+
+        return item;
+
     }
 
     @Override
     public List<Item> findByCategory(Category category) {
-        return List.of();
+
+        final String sql = "SELECT " +
+                " item_id," +
+                "    item_title, " +
+                "    item_description, " +
+                "    item_price, " +
+                "    item_disabled, " +
+                "    item_photo, " +
+                "    category_id " +
+                "FROM item " +
+                " WHERE category_id = ?; ";
+
+        List<Item> items = jdbcTemplate.query(sql, new ItemMapper(), category.getCategoryId());
+        for(Item item : items){
+            fillFields(item);
+        }
+
+        return items;
+
     }
 
     @Override
     public Item add(Item item) {
-        return null;
+
+
+
+
+
+    return null;
+
     }
 
     @Override
@@ -76,7 +117,7 @@ public class ItemJdbcRepository implements ItemRepository {
 
         final String sql = "SELECT category_id, category_name FROM category WHERE category_id = ?;";
 
-        return jdbcTemplate.query(sql, new CategoryMapper()).stream().findFirst().orElse(null);
+        return jdbcTemplate.query(sql, new CategoryMapper(), item.getCategory().getCategoryId()).stream().findFirst().orElse(null);
     }
     private List<Modifiers> findModifiersByItemId(int itemId){
         final String sql = "SELECT  " +
@@ -90,5 +131,13 @@ public class ItemJdbcRepository implements ItemRepository {
                 "WHERE i.item_id = ? ;";
 
         return jdbcTemplate.query(sql,  new ModifiersMapper(), itemId);
+    }
+    private void addSubModifiers(int itemId, int modifierId){
+        final String sql = "INSERT into submodifier(item_id, modifier_id) values( ?, ? );";
+
+
+
+
+
     }
 }

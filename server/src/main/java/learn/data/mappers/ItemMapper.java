@@ -1,5 +1,6 @@
 package learn.data.mappers;
 
+import learn.models.Category;
 import learn.models.Item;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -10,12 +11,15 @@ public class ItemMapper implements RowMapper<Item> {
     @Override
     public Item mapRow(ResultSet resultSet, int i) throws SQLException {
         Item item = new Item();
+        Category category = new Category();
         item.setItemId(resultSet.getInt("item_id"));
         item.setTitle(resultSet.getString("item_title"));
         item.setDescription(resultSet.getString("item_description"));
         item.setPrice(resultSet.getBigDecimal("item_price"));
         item.setPhoto(resultSet.getString("item_photo"));
         item.setDisabled(resultSet.getBoolean("item_disabled"));
+        category.setCategoryId(resultSet.getInt("category_id"));
+        item.setCategory(category);
 
         return item;
     }

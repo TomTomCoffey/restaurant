@@ -11,7 +11,7 @@ public interface ItemRepository {
 
     public Item findById(int itemId);
 
-    public List<Item> findByCategory(Category category);
+    public List<Item> findByCategoryId(int categoryId);
 
     public Item add(Item item);
 

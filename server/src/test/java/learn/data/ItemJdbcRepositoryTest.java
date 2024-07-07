@@ -58,6 +58,8 @@ class ItemJdbcRepositoryTest {
         item.setModifiers(mods.getModifiers());
         Item expected = repository.add(item);
         assertEquals(item.getTitle(), expected.getTitle());
+        Item checker = repository.findById(expected.getItemId());
+        assertEquals(mods.getModifiers().size(), checker.getModifiers().size());
     }
 
     @Test
@@ -80,6 +82,22 @@ class ItemJdbcRepositoryTest {
         assertFalse(whatWhats);
 
     }
+
+    @Test
+    void shouldUpdate(){
+        Item item = repository.findById(1);
+        item.setTitle("Testing");
+        int modSize = item.getModifiers().size();
+        item.getModifiers().remove(0);
+        boolean expected = repository.update(item);
+        assertTrue(expected);
+        item = repository.findById(1);
+        assertEquals("Testing", item.getTitle());
+        assertEquals(modSize-1, item.getModifiers().size());
+
+    }
+
+
 
 
 }

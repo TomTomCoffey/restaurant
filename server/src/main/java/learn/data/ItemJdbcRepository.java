@@ -13,6 +13,7 @@ import learn.models.Category;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
+import java.util.HashSet;
 import java.util.List;
 
 @Repository
@@ -142,12 +143,14 @@ public class ItemJdbcRepository implements ItemRepository {
     @Transactional
     public boolean update(Item item) {
 
+        Item previous = findById(item.getItemId());
+
         final String sql = "UPDATE item SET" +
-                " item_title = ? " +
-                " item_description = ?" +
-                " item_photo = ? " +
-                " item_price = ?" +
-                " item_disabled = ? +" +
+                " item_title = ?, " +
+                " item_description = ?, " +
+                " item_photo = ?, " +
+                " item_price = ?, " +
+                " item_disabled = ?, " +
                 " category_id = ? " +
                 " WHERE item_id = ? ;";
 
@@ -159,10 +162,27 @@ public class ItemJdbcRepository implements ItemRepository {
             return false;
         }
 
-        //// at this point i need to go through
+        //// at this point I need to go through
         // the modifiers to see if anything has changed
         // and update the submodifiers accordingly
+        HashSet<Integer> previousModifiers = new HashSet<>();
+        for(Modifiers modifier : previous.getModifiers()){
+            previousModifiers.add(modifier.getModifier_id());
+        }
 
+        HashSet<Integer> currentModifiers = new HashSet<>();
+        for(Modifiers modifier : item.getModifiers()){
+            currentModifiers.add(modifier.getModifier_id());
+            if(!previousModifiers.contains(modifier.getModifier_id())){
+                addSubModifiers(item.getItemId(), modifier.getModifier_id());
+            }
+        }
+
+        for(Modifiers modifier : previous.getModifiers()){
+            if(!currentModifiers.contains(modifier.getModifier_id())){
+                deleteSubModifiers(item.getItemId(), modifier.getModifier_id());
+            }
+        }
 
         return true;
 
@@ -217,5 +237,9 @@ public class ItemJdbcRepository implements ItemRepository {
 
         return rowsAffected > 0;
 
+    }
+
+    private boolean deleteSubModifiers(int itemId, int modifierId){
+        return jdbcTemplate.update("DELETE FROM submodifier WHERE item_id = ? AND modifier_id = ? ;", itemId, modifierId) > 0;
     }
 }

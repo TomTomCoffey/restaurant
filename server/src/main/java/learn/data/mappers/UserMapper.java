@@ -16,6 +16,7 @@ public class UserMapper implements RowMapper {
         user.setFirstName(resultSet.getString("user_first_name"));
         user.setLastName(resultSet.getString("user_last_name"));
         user.setBanned(resultSet.getBoolean("user_is_banned"));
+        user.setHashedPassword(resultSet.getString("user_hashed_password"));
 
         return user;
     }

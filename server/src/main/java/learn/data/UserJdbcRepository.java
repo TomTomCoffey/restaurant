@@ -5,11 +5,13 @@ import learn.models.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.util.List;
 
+@Repository
 public class UserJdbcRepository implements UserRepository {
 
       private final JdbcTemplate jdbcTemplate;
@@ -127,19 +129,19 @@ public class UserJdbcRepository implements UserRepository {
     @Transactional
     public boolean update(User user) {
 
-        final String sql = "UPDATE user SET" +
-                "user_username = ?, " +
-                "user_first_name = ?, " +
-                "user_last_name = ?, " +
-                "user_hashed_password = ?," +
-                "user_is_banned = ?, " +
-                "user_email = ?" +
-                "WHERE user_id = ?; ";
+        final String sql = "UPDATE app_user SET" +
+                " user_username = ?, " +
+                " user_first_name = ?, " +
+                " user_last_name = ?, " +
+                " user_hashed_password = ?," +
+                " user_is_banned = ?, " +
+                " user_email = ?" +
+                " WHERE user_id = ?; ";
 
         return jdbcTemplate.update(sql, user.getUserName(),
                 user.getFirstName(), user.getLastName(), user.getHashedPassword(),
                 user.isBanned(), user.getEmail(), user.getUserId()) > 0;
-        
+
     }
 
     @Override

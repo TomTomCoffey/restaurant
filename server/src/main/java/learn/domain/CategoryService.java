@@ -52,6 +52,13 @@ public class CategoryService {
             result.addMessage("Category must have valid name", ResultType.INVALID);
             return result;
         }
+        Category category1 = repository.findAll().stream()
+                .filter(c -> c.setCategoryId( == category.getCategoryId())
+                .findFirst().orElse(null);
+
+                if(category1 == null){
+                    result.addMessage("Category was not found to update", ResultType.NOT_FOUND);
+                }
 
         boolean expected = repository.update(category);
 

@@ -5,7 +5,7 @@ import learn.models.Modifiers;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Modifier;
-import java.util.List
+import java.util.List;
 
 @Service
 public class ModifiersService {
@@ -48,7 +48,7 @@ public class ModifiersService {
             return result;
         }
         Modifiers m = repository.findAll().stream()
-                .filter(m -> m.getModifier_id() == modifiers.getModifier_id())
+                .filter(mod -> mod.getModifier_id() == modifiers.getModifier_id())
                 .findFirst()
                 .orElse(null);
 
@@ -59,10 +59,14 @@ public class ModifiersService {
         boolean expected = repository.update(modifiers);
         if(!expected){
             result.addMessage("An error occured in the repository", ResultType.NOT_FOUND);
-            return result
+            return result;
         }
         result.setPayload(modifiers);
         return result;
+    }
+
+    public boolean deleteById(int id){
+        return repository.deleteById(id);
     }
 
     private Result<Modifiers> validate(Modifiers modifiers){

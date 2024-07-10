@@ -60,7 +60,8 @@ public class UserJdbcRepository implements UserRepository {
 
         User user = (User) jdbcTemplate.query(sql, new UserMapper(), userName)
                 .stream()
-                .findFirst().orElse(null);
+                .findFirst()
+                .orElse(null);
 
         if(user != null) {
             user.setRoles(findRoles(user.getUserId()));
@@ -86,7 +87,8 @@ public class UserJdbcRepository implements UserRepository {
 
         User user = (User) jdbcTemplate.query(sql, new UserMapper(), userId)
                 .stream()
-                .findFirst().orElse(null);
+                .findFirst()
+                .orElse(null);
 
         if(user != null) {
             user.setRoles(findRoles(user.getUserId()));

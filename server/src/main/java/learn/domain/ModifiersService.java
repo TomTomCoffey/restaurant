@@ -25,7 +25,13 @@ public class ModifiersService {
     }
 
     public Result<Modifiers> add(Modifiers modifiers){
+
+
         Result<Modifiers> result = validate(modifiers);
+
+        if(modifiers.getModifier_id() != 0){
+            result.addMessage("New items cannot have ID other than 0", ResultType.INVALID);
+        }
 
         if(!result.isSuccess()){
             return result;
@@ -72,6 +78,8 @@ public class ModifiersService {
     private Result<Modifiers> validate(Modifiers modifiers){
         Result<Modifiers> result = new Result<>();
 
+
+
         if(modifiers.getName() == null || modifiers.getName().isEmpty() || modifiers.getName().isBlank()){
             result.addMessage("Modifiers must have a valid name", ResultType.INVALID);
 
@@ -79,6 +87,14 @@ public class ModifiersService {
         if(modifiers.getPrice().doubleValue() < 0){
             result.addMessage("Modifiers cannot have negative price", ResultType.INVALID);
 
+        }
+
+        Modifiers doubler = repository.findAll().stream()
+                .filter(m -> m.getName().equals(modifiers.getName()) &&
+                        m.getPrice().equals(modifiers.getPrice())).findFirst().orElse(null);
+
+        if(doubler != null){
+            result.addMessage("This modifier already exists in the databse", ResultType.INVALID);
         }
 
         return result;

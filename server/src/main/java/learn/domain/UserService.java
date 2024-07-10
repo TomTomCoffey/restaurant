@@ -2,18 +2,28 @@ package learn.domain;
 
 import learn.data.UserRepository;
 import learn.models.User;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository repository;
+ //   private final PasswordEncoder encoder;
 
     public UserService(UserRepository repository) {
         this.repository = repository;
+      //  this.encoder = encoder;
     }
 
     public List<User> findAll(){
@@ -38,6 +48,7 @@ public class UserService {
             result.addMessage("User cannot have a preset ID", ResultType.INVALID);
             return result;
         }
+      //  user.setHashedPassword(encoder.encode(user.getHashedPassword()));
         User expected = repository.add(user);
 
         if(expected == null){
@@ -123,5 +134,22 @@ public class UserService {
         String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
         Pattern pattern = Pattern.compile(regex);
         return pattern.matcher(hashedPassword).matches();
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DisabledException {
+        User user = repository.findByUserName(username);
+
+        if (user == null){
+            throw new UsernameNotFoundException(username + " not found");
+        }
+        else if(user.isBanned()){
+            throw new DisabledException(username + " is banned");
+        }
+
+        List<GrantedAuthority> authorities = user.getRoles().stream().map(roleName -> new SimpleGrantedAuthority("ROLE_" + roleName))
+                .collect(Collectors.toList());
+
+        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getHashedPassword(), authorities);
     }
 }

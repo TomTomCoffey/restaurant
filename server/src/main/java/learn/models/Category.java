@@ -7,6 +7,14 @@ public class Category {
 
     public Category(){}
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "categoryId=" + categoryId +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public Category(int categoryId, String name) {
         this.categoryId = categoryId;
         this.name = name;

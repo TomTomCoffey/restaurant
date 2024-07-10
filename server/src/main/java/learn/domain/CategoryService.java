@@ -34,12 +34,23 @@ public class CategoryService {
 
         if(category.getCategoryId() != 0){
             result.addMessage("New Categories cannot have a set ID", ResultType.INVALID);
+            return result;
         }
 
         if(category.getName() == null || category.getName().isEmpty() || category.getName().isBlank()){
             result.addMessage("Category must have valid name", ResultType.INVALID);
             return result;
         }
+
+        Category tester = repository.findAll().stream()
+                .filter(c -> c.getName().equals(category.getName()))
+                .findFirst().orElse(null);
+
+        if(tester != null){
+            result.addMessage("Category already exists", ResultType.INVALID);
+            return result;
+        }
+
         Category category1 = repository.add(category);
 
         if(category1 == null){
@@ -72,6 +83,14 @@ public class CategoryService {
 
                 if(category1 == null){
                     result.addMessage("Category was not found to update", ResultType.NOT_FOUND);
+                    return result;
+                }
+                category1 = repository.findAll().stream()
+                        .filter(c -> c.getName().equals(category.getName()))
+                        .findFirst().orElse(null);
+
+                if(category1 != null){
+                    result.addMessage("Category Name is already taken", ResultType.INVALID);
                     return result;
                 }
 

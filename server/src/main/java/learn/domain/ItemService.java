@@ -1,6 +1,9 @@
 package learn.domain;
 
+import learn.data.CategoryRepository;
 import learn.data.ItemRepository;
+import learn.data.ModifiersRepository;
+import learn.models.Category;
 import learn.models.Item;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +13,13 @@ import java.util.List;
 public class ItemService {
 
     private final ItemRepository repository;
+    private final CategoryRepository categoryRepository;
+    private final ModifiersRepository modifiersRepository;
 
-    public ItemService(ItemRepository repository) {
+    public ItemService(ItemRepository repository, CategoryRepository categoryRepository, ModifiersRepository modifiersRepository) {
         this.repository = repository;
+        this.categoryRepository = categoryRepository;
+        this.modifiersRepository = modifiersRepository;
     }
 
     public List<Item> findAll(){
@@ -106,6 +113,18 @@ public class ItemService {
 
         if(checker != null){
             result.addMessage("Item already exists with that title", ResultType.INVALID);
+        }
+
+        if(item.getCategory() == null){
+            result.addMessage("Item must be in a category", ResultType.NOT_FOUND);
+            return result;
+        }
+        Category category = categoryRepository.findAll().stream()
+                .filter(c -> c.getCategoryId() == item.getCategory().getCategoryId())
+                .findFirst().orElse(null);
+
+        if(category == null){
+            result.addMessage("Must be a valid category", ResultType.INVALID);
         }
 
         return result;

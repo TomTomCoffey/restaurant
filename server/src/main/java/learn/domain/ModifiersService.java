@@ -64,7 +64,7 @@ public class ModifiersService {
         }
         boolean expected = repository.update(modifiers);
         if(!expected){
-            result.addMessage("An error occured in the repository", ResultType.NOT_FOUND);
+            result.addMessage("An error occurred in the repository", ResultType.NOT_FOUND);
             return result;
         }
         result.setPayload(modifiers);

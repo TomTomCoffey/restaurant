@@ -5,8 +5,10 @@ import learn.data.ItemRepository;
 import learn.data.ModifiersRepository;
 import learn.models.Category;
 import learn.models.Item;
+import learn.models.Modifiers;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -63,6 +65,10 @@ public class ItemService {
     public Result<Item> update(Item item){
 
         Result<Item> result = validate(item);
+
+        if(!result.isSuccess()){
+            return result;
+        }
 
         Item checker = repository.findById(item.getItemId());
 
@@ -125,6 +131,21 @@ public class ItemService {
 
         if(category == null){
             result.addMessage("Must be a valid category", ResultType.INVALID);
+        }
+
+        HashSet<Integer> modifiers = new HashSet<>();
+
+        List<Modifiers> lister = modifiersRepository.findAll();
+
+        for(Modifiers m : lister){
+            modifiers.add(m.getModifier_id());
+        }
+
+        for(Modifiers m : item.getModifiers()){
+            if(!modifiers.contains(m.getModifier_id())){
+                result.addMessage("Error: Modifier with ID " + m.getModifier_id() +" does not exist", ResultType.INVALID);
+                return result;
+            }
         }
 
         return result;

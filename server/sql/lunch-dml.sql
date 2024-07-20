@@ -23,24 +23,44 @@ use lunch;
     ('Pastry', 'Blueberry Muffin, Corn Muffin', 1.75, 'temp.jpg', 3), -- 6
     ('Tom Tom Patty Melt', 'Chopped Hamburger, Chopped Bacon, Texas Sauce and Onions wedged between a grill cheese', 5.50, 'temp.jpg', 6), -- 7
     ('Chicken Tender Buffalo BLT Wrap', 'Crispy chicken tenders, bacon, lettuce, tomato, and buffalo sauce wrapped in a tortilla.', 7.50, 'temp.jpg', 6), -- 8
-    ('Bacon, Lettuce and Tomato', 'On white, wheat, rye bread or hard roll.', 5.00, 'temp.jpg', 6); -- 9
+    ('Bacon, Lettuce and Tomato', 'On white, wheat, rye bread or hard roll.', 5.00, 'temp.jpg', 6), -- 9
     ('Chicken Tender Sandwich', '', 5.50, 'temp.jpg', 6), -- 10
     ('Chicken Tender BLT Sandwich', '', 7.25, 'temp.jpg', 6), -- 11
     ('Buffalo Chicken Tender BLT Sandwich', '', 8.00, 'temp.jpg', 6), -- 12
     ('Buffalo Chicken Tender Sandwich', '', 6.25, 'temp.jpg', 6), -- 13
-    ('Tuna Fish', 'On white, wheat, rye bread or hard roll.', 5.00, 6), -- 14
-    ('Tuna Melt', 'On white, wheat, rye bread or hard roll.', 6.00, 6), -- 15
-    ('Spicy Tuna Melt', 'Tuna melt with Buffalo Sauce, Bacon and Pickles', 7.25, 6), -- 16
-    ('Fish Platter', 'Two pieces of fish with french fries and Tartar Sauce', 8.00, 6), -- 17
-    ('Fish Sandwich', 'Lettuce, Tomato and Tartar Sauce', 5.25, 6), -- 18
-    ('2 Eggs and Toast', 'Any style.', 4.50, 2), -- 19
-    ('Western Omelette', 'Two eggs scrambled with ham, onions, peppers and toast.', 6.50, 2), -- 20
-    ('Cheese Omlette', 'Two eggs scrambled with White American cheese and Toast', 5.50, 2), -- 21
-    ('Ham & Cheese Omelette', 'Ham and cheese omelette served with a choice of bread: English muffin, hard roll, rye, wheat, or white', 6.50, 2), -- 22
-    ('Veggie Omelette', 'Tomatoes, onions, and green pepper.', 6.50, 2) -- 23
-    ('Dog & Cheese Omelette', 'Chopped hot dog and cheese.', 6.75, 2) -- 24
-    ('Pancakes', '', 7.50, 2) -- 25
-    ('French Toast', '', 7.50, 2) -- 26
+    ('Tuna Fish', 'On white, wheat, rye bread or hard roll.', 5.00, 'temp.jpg', 6), -- 14
+    ('Tuna Melt', 'On white, wheat, rye bread or hard roll.', 6.00, 'temp.jpg', 6), -- 15
+    ('Spicy Tuna Melt', 'Tuna melt with Buffalo Sauce, Bacon and Pickles', 7.25, 'temp.jpg', 6), -- 16
+    ('Fish Platter', 'Two pieces of fish with french fries and Tartar Sauce', 8.00,'temp.jpg', 6), -- 17
+    ('Fish Sandwich', 'Lettuce, Tomato and Tartar Sauce', 5.25,'temp.jpg', 6), -- 18
+    ('2 Eggs and Toast', 'Any style.', 4.50,'temp.jpg', 2), -- 19
+    ('Western Omelette', 'Two eggs scrambled with ham, onions, peppers and toast.', 6.50,'temp.jpg', 2), -- 20
+    ('Cheese Omlette', 'Two eggs scrambled with White American cheese and Toast', 5.50,'temp.jpg', 2), -- 21
+    ('Ham & Cheese Omelette', 'Ham and cheese omelette served with a choice of bread: English muffin, hard roll, rye, wheat, or white', 6.50,'temp.jpg', 2), -- 22
+    ('Veggie Omelette', 'Tomatoes, onions, and green pepper.', 6.50,'temp.jpg', 2), -- 23
+    ('Dog & Cheese Omelette', 'Chopped hot dog and cheese.', 6.75,'temp.jpg', 2), -- 24
+    ('Pancakes', '', 8.50,'temp.jpg', 2), -- 25
+    ('French Toast', '', 8.50,'temp.jpg', 2), -- 26
+    ('Side of Home Fries', '',  3.00,'temp.jpg', 2), -- 27
+    ('Side of Grits', '', 3.00,'temp.jpg', 2), -- 28
+    ('Texas Hot Weiners', 'Pork and Beef hot dog. Please specify what you want on the hot dog otherwise it will be plain', 2.75,'temp.jpg', 1), -- 29
+    ('Hot Dog No Roll', 'Pork and Beef hot dog. Please specify what you want on the hot dog otherwise it will be plain', 2.00,'temp.jpg', 1), -- 30
+    ('All Beef Texas Weiners', 'Please specify what you want on the hot dog otherwise it will be plain', 3.00,'temp.jpg', 1), -- 31
+    ('Hamburger', '', 3.25,'temp.jpg', 1), -- 32
+    ('Cheeseburger', '', 3.75,'temp.jpg', 1), -- 33
+    ('Double Hamburger', '', 6.00,'temp.jpg', 1), -- 34
+    ('Double Cheeseburger', '', 7.00,'temp.jpg', 1), -- 35
+    ('Side of Sauce', '4 oz cup of sauce', 1.25,'temp.jpg', 1), -- 36
+    ('French Fries', '', 2.75,'temp.jpg', 1), -- 37
+    ('Onion Rings', '', 3.00,'temp.jpg', 1), -- 38
+    ('Buffalo Burger', '1/4 Burger mixed with our Buffalo sauce, Bacon, Lettuce and Tomato with Ranch Dressing on a hard roll', 8.00,'temp.jpg', 1), -- 39
+    ('Can Soda', '', 2.00,'temp.jpg', 4), -- 40
+    ('Coffee', 'Please specify how you take your coffee. Milk, Half and Half, How many sugars, Splenda, Equal or Sweet and Low', 2.00,'temp.jpg', 4), -- 41
+    ('Hot Tea', 'Please specify how you take your tea. Milk, Half and Half, How many sugars, Splenda, Equal or Sweet and Low', 2.00,'temp.jpg', 4), -- 42
+    ('Bottled Water', '', 2.75,'temp.jpg', 4), -- 43
+    ('Small Jar 16 ounce', '', 9.00,'temp.jpg', 5), -- 44
+    ('Large Jar 25 ounce', '', 13.00,'temp.jpg', 5); -- 45
+
 
 
 
@@ -68,8 +88,8 @@ use lunch;
     ('Texas Sauce', 0.50), -- 19
     ('Jelly', 0.50), -- 20
     ('Egg White', 1.00), -- 21
-    ('Melted Cheddar Cheese', 1.00), -- 22
-    ('White American Cheese Slice', 1.00) -- 23
+    ('Melted Cheddar Cheese', 1.25), -- 22
+    ('White American Cheese Slice', 1.25), -- 23
     ('Blueberry', 0.00), -- 24
     ('Corn', 0.00), -- 25
     ('No Bacon', 0.00), -- 26
@@ -91,20 +111,25 @@ use lunch;
     ('Over Medium', 0.00), -- 42
     ('Over Hard', 0.00), -- 43
     ('Scrambled', 0.00), -- 44
-    ('Sunny Side Up', 0.00); -- 45
-    
-    
+    ('Sunny Side Up', 0.00), -- 45
+    ('Bacon Bits', 1.25), -- 46
+    ('Texas Sauce', 0.00), -- 47
+    ('Mustard', 0.00), -- 48
+    ('Sauerkraut', 0.00), -- 49
+    ('Ketchup', 0.00), -- 50
+    ('Heavy Onions', 0.50), -- 51
+    ('Heavy Texas Sauce', 0.50), -- 52
+    ('Relish', 0.00), -- 53
+    ('Split Well Done', 0.00), -- 54
+    ('Bacon', 1.25), -- 55
+    ('Extra Cheese', 1.00); -- 56
 
     
-  
-
-
     
-
 
 
     insert into submodifier(modifier_id, item_id) values
-    (1, 1), --Western Sandwich
+    (1, 1), -- Western Sandwich
     (2, 1),
     (3, 1),
     (4, 1),
@@ -211,7 +236,7 @@ use lunch;
     (10, 12),
     (11, 12),
     (12, 12),    
-    (17, 13), --- Buffalo Chicken Tender Sandwich
+    (17, 13), -- Buffalo Chicken Tender Sandwich
     (18, 13),
     (32, 13),
     (33, 13),
@@ -265,7 +290,7 @@ use lunch;
     (10, 16),
     (11, 16),
     (12, 16),
-    (8, 17),  --- Fish Platter
+    (8, 17),  -- Fish Platter
     (9, 17),
     (10, 17),
     (11, 17),
@@ -408,13 +433,111 @@ use lunch;
     (16, 25),
     (14, 26), -- French Toast
     (15, 26),
-    (16, 26);
-
-
-
-    
-
-
-   
-
+    (16, 26),
+    (19, 27), -- Side of Home Fries
+    (22, 27),
+    (23, 27),
+    (46, 27),
+    (19, 28), -- Side of Grits
+    (22, 28),
+    (23, 28),
+    (46, 28),
+    (47, 29), -- Texas Hot Weiner
+    (48, 29),
+    (38, 29),
+    (32, 29),
+    (33, 29),
+    (46, 29),
+    (49, 29),
+    (50, 29),
+    (51, 29),
+    (52, 29),
+    (53, 29),
+    (54, 29),
+    (47, 30), -- Hot Dog No Roll
+    (48, 30),
+    (38, 30),
+    (32, 30),
+    (33, 30),
+    (46, 30),
+    (49, 30),
+    (50, 30),
+    (51, 30),
+    (52, 30),
+    (53, 30),
+    (54, 30),
+    (47, 31), -- All Beef Hot Dog
+    (48, 31),
+    (38, 31),
+    (32, 31),
+    (33, 31),
+    (46, 31),
+    (49, 31),
+    (50, 31),
+    (51, 31),
+    (52, 31),
+    (53, 31),
+    (54, 31),
+    (2, 32), -- Hamburger
+    (47, 32),
+    (38, 32),
+    (17, 32),
+    (18, 32),
+    (34, 32),
+    (48, 32),
+    (49, 52),
+    (50, 32),
+    (51, 32),
+    (52, 32),
+    (53, 32),
+    (55, 32),
+    (2, 33), -- Cheeseburger
+    (47, 33),
+    (38, 33),
+    (17, 33),
+    (18, 33),
+    (34, 33),
+    (48, 33),
+    (49, 33),
+    (50, 33),
+    (51, 33),
+    (52, 33),
+    (53, 33),
+    (55, 33),
+    (56, 33),
+    (2, 34), -- Double Hamburger
+    (47, 34),
+    (38, 34),
+    (17, 34),
+    (18, 34),
+    (34, 34),
+    (48, 34),
+    (49, 34),
+    (50, 34),
+    (51, 34),
+    (52, 34),
+    (53, 34),
+    (55, 34),
+    (2, 35), -- Double Cheeseburger
+    (47, 35),
+    (38, 35),
+    (17, 35),
+    (18, 35),
+    (34, 35),
+    (48, 35),
+    (49, 35),
+    (50, 35),
+    (51, 35),
+    (52, 35),
+    (53, 35),
+    (55, 35),
+    (56, 35),
+    (19, 37), -- French Fries
+    (22, 37),
+    (23, 37),
+    (46, 37),
+    (19, 38), -- Onion Rings
+    (22, 38),
+    (23, 38),
+    (46, 38);
     

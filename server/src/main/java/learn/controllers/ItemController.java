@@ -54,7 +54,7 @@ public class ItemController {
         return ErrorResponse.build(result);
     }
 
-    @PutMapping("/{itemId}")
+    @PutMapping("/id/{itemId}")
     public ResponseEntity<Object> update(@PathVariable int itemId, @RequestBody Item item){
         if(itemId != item.getItemId()){
             return new ResponseEntity<>(HttpStatus.CONFLICT);

@@ -1,0 +1,43 @@
+@url = http://localhost:8080/api/modifiers
+
+###
+
+GET {{url}} HTTP/1.1
+
+###
+
+GET {{url}}/item/1 HTTP/1.1
+
+###
+PUT {{url}}/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "modifier_id": 1,
+    "name": "English Muffin",
+    "price": 1.00,
+    "disabled": false
+}
+
+### BAD PATH
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Hard Roll",
+    "price": 1.00,
+    "disabled": false
+}
+
+### HAPPY PAth
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Tester",
+    "price": 1.00,
+    "disabled": false
+}
+
+###
+DELETE {{url}}/57 HTTP/1.1

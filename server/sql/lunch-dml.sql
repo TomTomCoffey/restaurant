@@ -67,7 +67,7 @@ use lunch;
 
 
     insert into modifiers(modifier_name, modifier_price) values
-    ('English Miffin', 1.00),  -- 1
+    ('English Muffin', 1.00),  -- 1
     ('Hard Roll', 1.00), -- 2
     ('Toasted', 0.00), -- 3 
     ('Not Toasted', 0.00), -- 4
@@ -90,8 +90,8 @@ use lunch;
     ('Egg White', 1.00), -- 21
     ('Melted Cheddar Cheese', 1.25), -- 22
     ('White American Cheese Slice', 1.25), -- 23
-    ('Blueberry', 0.00), -- 24
-    ('Corn', 0.00), -- 25
+    ('Blueberry Muffin', 0.00), -- 24
+    ('Corn Muffin', 0.00), -- 25
     ('No Bacon', 0.00), -- 26
     ('No Onions', 0.00), -- 27
     ('No Sauce', 0.00), -- 28

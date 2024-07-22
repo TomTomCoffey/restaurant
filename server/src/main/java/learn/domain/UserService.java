@@ -19,11 +19,13 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
 
     private final UserRepository repository;
+    private final PasswordEncoder encoder;
  //   private final PasswordEncoder encoder;
 
-    public UserService(UserRepository repository) {
+    public UserService(UserRepository repository, PasswordEncoder encoder) {
         this.repository = repository;
       //  this.encoder = encoder;
+        this.encoder = encoder;
     }
 
     public List<User> findAll(){
@@ -48,7 +50,7 @@ public class UserService implements UserDetailsService {
             result.addMessage("User cannot have a preset ID", ResultType.INVALID);
             return result;
         }
-      //  user.setHashedPassword(encoder.encode(user.getHashedPassword()));
+        user.setHashedPassword(encoder.encode(user.getHashedPassword()));
         User expected = repository.add(user);
 
         if(expected == null){

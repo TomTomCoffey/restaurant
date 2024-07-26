@@ -62,6 +62,9 @@ use lunch;
     ('Large Jar 25 ounce', '', 13.00,'temp.jpg', 5); -- 45
 
 
+    COMMIT;
+
+
 
 
 
@@ -122,10 +125,22 @@ use lunch;
     ('Relish', 0.00), -- 53
     ('Split Well Done', 0.00), -- 54
     ('Bacon', 1.25), -- 55
-    ('Extra Cheese', 1.00); -- 56
+    ('Extra Cheese', 1.00), -- 56
+    ('Pepsi', 0.00), -- 57
+    ('Diet Pepsi', 0.00), -- 58
+    ('Mountain Dew', 0.00), -- 59
+    ('Rootbeer', 0.00), -- 60
+    ('Diet Rootbeer', 0.00), -- 61
+    ('Starry', 0.00), -- 62
+    ('Ginger Ale', 0.00), -- 63
+    ('Orange', 0.00), -- 64
+    ('Diet Orange', 0.00); -- 65
 
-    
-    
+
+       COMMIT;
+
+
+
 
 
     insert into submodifier(modifier_id, item_id) values
@@ -539,5 +554,15 @@ use lunch;
     (19, 38), -- Onion Rings
     (22, 38),
     (23, 38),
-    (46, 38);
-    
+    (46, 38),
+    (57, 40), -- Can Soda
+    (58, 40),
+    (59, 40),
+    (60, 40),
+    (61, 40),
+    (62, 40),
+    (63, 40),
+    (64, 40),
+    (65, 40);
+
+    COMMIT;

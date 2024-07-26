@@ -21,12 +21,12 @@ public class PrinterController {
             printerNames[i] = printServices[i].getName();
         }
 
-        return printerNames; ////this is how im gonna find the printer names for tony's 
+        return printerNames; ////this is how im gonna find the printer names for tony's
     }
 
     @PostMapping
     public String printText( @RequestBody String text) {
-
+        /////so im gonna change the request body to the Order and make a nice order tostring method so itll print nice on the recept
         String printerName = getPrinters()[0]; ///just grabbing the first printer because I onbly own one printer
 
         try {
@@ -54,6 +54,7 @@ public class PrinterController {
             return "Printing failed: " + e.getMessage();
         }
     }
+
 
 
 

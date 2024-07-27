@@ -7,7 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 
 @RestController
-//@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/printer")
 public class PrinterController {
 

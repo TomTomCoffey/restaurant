@@ -195,6 +195,22 @@ public class ItemJdbcRepository implements ItemRepository {
         return jdbcTemplate.update("DELETE FROM item where item_id = ? ;", itemId) > 0;
     }
 
+    @Override
+    public boolean disableByCategory(int categoryId) {
+        final String sql = "UPDATE ITEM " +
+                " SET item_disabled = true " +
+                " WHERE category_id = ?;";
+        return jdbcTemplate.update(sql, categoryId) > 0;
+    }
+
+    @Override
+    public boolean enableByCategory(int categoryId) {
+        final String sql = "UPDATE ITEM " +
+                " SET item_disabled = false " +
+                " WHERE category_id = ?;";
+        return jdbcTemplate.update(sql, categoryId) > 0;
+    }
+
     private void fillFields(Item item){
         item.setCategory(findCategory(item));
         item.setModifiers(findModifiersByItemId(item.getItemId()));

@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable(); // 1
-        
+
         http.cors().and().authorizeRequests() // 2
                 .antMatchers("/user/signup", "/", "/user/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/signup", "/api/user/login").permitAll()
@@ -41,6 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/item", "/api/item/*").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/item").hasAnyRole( "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/item/*").hasAnyRole( "ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/item/category/enable/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/item/category/disable/*").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/item/*").hasAnyRole( "ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/user").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/user/*").hasAnyRole( "ADMIN")

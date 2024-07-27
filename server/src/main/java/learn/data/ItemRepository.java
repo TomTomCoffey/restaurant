@@ -18,4 +18,8 @@ public interface ItemRepository {
     public boolean update(Item item);
 
     public boolean deletebyID(int itemId);
+
+    public boolean disableByCategory(int categoryId);
+
+    public boolean enableByCategory(int categoryId);
 }

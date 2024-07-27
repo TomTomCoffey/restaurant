@@ -10,7 +10,7 @@ GET {{url}}/id/8 HTTP/1.1
 
 ###
 
-GET {{url}}/category/id/3 HTTP/1.1
+GET {{url}}/category/id/1 HTTP/1.1
 
 ###
 
@@ -68,3 +68,9 @@ Content-Type: application/json
       }
      ]
 }
+
+###
+PUT {{url}}/category/enable/1 HTTP/1.1
+
+###
+PUT {{url}}/category/disable/1 HTTP/1.1

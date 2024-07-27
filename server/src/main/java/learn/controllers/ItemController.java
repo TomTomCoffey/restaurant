@@ -65,6 +65,22 @@ public class ItemController {
         }
         return ErrorResponse.build(result);
     }
+    @PutMapping("/category/enable/{id}")
+    public ResponseEntity<Object> enableCategory(@PathVariable int id){
+        Result<Item> result = service.enableCategory(id);
+        if(result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ErrorResponse.build(result);
+    }
+    @PutMapping("/category/disable/{id}")
+    public ResponseEntity<Object> disableCategory(@PathVariable int id){
+        Result<Item> result = service.disableCategory(id);
+        if(result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ErrorResponse.build(result);
+    }
 
     @DeleteMapping("/{itemId}")
     public ResponseEntity<Void> deleteById(@PathVariable int itemId){

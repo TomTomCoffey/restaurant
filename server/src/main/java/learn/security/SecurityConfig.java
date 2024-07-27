@@ -33,9 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable(); // 1
-
-
-
+        
         http.cors().and().authorizeRequests() // 2
                 .antMatchers("/user/signup", "/", "/user/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/signup", "/api/user/login").permitAll()
@@ -50,18 +48,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/api/user/*").hasRole("ADMIN")
                 .antMatchers("/api/admin").hasRole("ADMIN")
                 .antMatchers("/admin").hasRole("ADMIN")
-                
+                .antMatchers(HttpMethod.GET, "/api/category").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/category").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/category/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/category/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/modifiers").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/modifiers").hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/api/modifiers/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/modifiers/*").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/printer").hasAnyRole("USER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/printer").hasAnyRole("USER", "ADMIN")
                 .and()
                // .addFilter(new JwtRequestFilter(authenticationManager(), converter))
                 .sessionManagement() // 4
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
-
-    /*@Override
-    @Bean
-    protected AuthenticationManager authenticationManager() throws Exception {
-        return super.authenticationManager();
-    }*/
 
     @Bean
     public PasswordEncoder getEncoder() {

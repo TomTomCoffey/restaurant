@@ -61,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/printer").hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.POST, "/api/printer").hasAnyRole("USER", "ADMIN")
                 .and()
-               // .addFilter(new JwtRequestFilter(authenticationManager(), converter))
+                .addFilter(new JwtRequestFilter(authenticationManager(), converter))
                 .sessionManagement() // 4
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

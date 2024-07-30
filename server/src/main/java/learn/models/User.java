@@ -4,7 +4,7 @@ import java.util.List;
 
 public class User {
     private int userId;
-    private String userName;
+    private String username;
     private String firstName;
     private String lastName;
     private String email;
@@ -16,7 +16,7 @@ public class User {
 
     public User(int userId, String userName, String firstName, String lastName, String email, String hashedPassword, List<String> roles, boolean isBanned) {
         this.userId = userId;
-        this.userName = userName;
+        this.username = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -34,11 +34,11 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getFirstName() {

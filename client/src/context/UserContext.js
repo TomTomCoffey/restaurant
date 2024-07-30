@@ -1,21 +1,20 @@
+// UserContext.js
 import React, { createContext, useState, useEffect } from 'react';
-import {jwtDecode} from 'jwt-decode'; // Removed curly braces
+import { jwtDecode } from "jwt-decode";
 
 const UserContext = createContext({});
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem('user');
-    return savedUser ? JSON.parse(savedUser) : null;
-  });
+  const [user, setUser] = useState(null);
   const [decodedTokenIn, setDecodedToken] = useState({});
 
   const fetchUserDetails = async (username) => {
-    if (username !== undefined) {
+    if(username !== undefined){
       const response = await fetch(`http://localhost:8080/api/user/username/${username}`);
       const userDetails = await response.json();
       return userDetails;
-    } else {
+    }
+    else {
       return Promise.reject('Null username');
     }
   };
@@ -26,18 +25,16 @@ const UserProvider = ({ children }) => {
     if (token) {
       const decodedToken = jwtDecode(token);
       fetchUserDetails(decodedToken.sub).then(userDetails => {
-        const user = {
+        setUser({
           username: decodedToken.sub,
           authorities: decodedToken.authorities,
           exp: decodedToken.exp,
-          cart: [], // TODO: fetch cart from server
           ...userDetails,
-        };
-        setUser(user);
-        localStorage.setItem('user', JSON.stringify(user));
+        });
         console.log(decodedToken);
-      }, (error) => {
-        console.error(error);
+      }, (data) => {
+        console.log(data);
+        console.log(user);
       });
     }
   }, [decodedTokenIn]);

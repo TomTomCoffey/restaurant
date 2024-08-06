@@ -38,9 +38,7 @@ function Login() {
               if (data.jwt_token) {
                   localStorage.setItem('jwtToken', data.jwt_token);
                   const decodedToken = jwtDecode(data.jwt_token);
-                  console.log('From Login.js', decodedToken);
                   setToken(decodedToken);
-                  console.log('From Login.js', decodedToken);
                   sleep(500).then(() => {
                       navigate('/');
                   });

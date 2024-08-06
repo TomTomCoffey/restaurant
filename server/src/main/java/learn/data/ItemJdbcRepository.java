@@ -36,7 +36,8 @@ public class ItemJdbcRepository implements ItemRepository {
                 "    item_disabled, " +
                 "    item_photo, " +
                 "    category_id " +
-                "FROM item;";
+                " FROM item " +
+                " ORDER BY category_id ; ";
 
         List<Item> items = jdbcTemplate.query(sql, new ItemMapper());
 

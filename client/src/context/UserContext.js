@@ -30,11 +30,10 @@ const UserProvider = ({ children }) => {
           authorities: decodedToken.authorities,
           exp: decodedToken.exp,
           ...userDetails,
+          cart: []
         });
-        console.log(decodedToken);
       }, (data) => {
-        console.log(data);
-        console.log(user);
+        
       });
     }
   }, [decodedTokenIn]);

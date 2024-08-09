@@ -134,6 +134,30 @@ public class ItemService {
         return result;
     }
 
+    public Result<Item> changePriceByCategory(double percentage, int categoryId){
+        Result<Item> result = new Result<>();
+
+        Category category = categoryRepository.findAll().stream()
+                .filter(c -> c.getCategoryId() == categoryId)
+                .findFirst().orElse(null);
+
+        if(category == null){
+            result.addMessage("Category does not exist", ResultType.NOT_FOUND);
+            return result;
+        }
+
+        boolean expected = repository.changePriceByCategory(percentage, categoryId);
+
+        if(!expected){
+            result.addMessage("Something went wrong in the database", ResultType.INVALID);
+            return result;
+        }
+        return result;
+
+
+
+    }
+
     private Result<Item> validate(Item item){
         Result<Item> result = new Result<>();
         if(item == null){

@@ -44,6 +44,7 @@ function Menu() {
         <div className="menu">
             {Object.keys(groupItems).map(category => (
                 <div key={category} className="menu-category">
+                    
                     <h2 className="category-title">{category}</h2>
                     <div className="menu-items">
                         {groupItems[category].map(item => (

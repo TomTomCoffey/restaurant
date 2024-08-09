@@ -212,6 +212,15 @@ public class ItemJdbcRepository implements ItemRepository {
         return jdbcTemplate.update(sql, categoryId) > 0;
     }
 
+    @Override
+    public boolean changePriceByCategory(double percentage, int categoryId) {
+        final String sql = "UPDATE ITEM " +
+                " SET item_price = (item_price + (item_price * ?)) " +
+                " WHERE category_id = ?;";
+        return jdbcTemplate.update(sql, percentage, categoryId) > 0;
+    }
+
+
     private void fillFields(Item item){
         item.setCategory(findCategory(item));
         item.setModifiers(findModifiersByItemId(item.getItemId()));

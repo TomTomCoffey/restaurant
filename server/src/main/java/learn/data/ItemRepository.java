@@ -22,4 +22,6 @@ public interface ItemRepository {
     public boolean disableByCategory(int categoryId);
 
     public boolean enableByCategory(int categoryId);
+
+    public boolean changePriceByCategory(double percentage, int categoryId);
 }

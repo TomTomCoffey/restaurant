@@ -82,6 +82,15 @@ public class ItemController {
         return ErrorResponse.build(result);
     }
 
+    @PutMapping("/category/{id}/priceChange")
+    public ResponseEntity<Object> changePriceByCategory(@PathVariable int id, @RequestBody double percentage){
+        Result<Item> result = service.changePriceByCategory(percentage, id);
+        if(result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ErrorResponse.build(result);
+    }
+
     @DeleteMapping("/{itemId}")
     public ResponseEntity<Void> deleteById(@PathVariable int itemId){
         if(service.deleteById(itemId)){

@@ -115,3 +115,7 @@ code {
   max-height: 70vh; 
   overflow-y: auto; 
 }
+
+.modal-quantity{
+ max-width: 50px;
+}

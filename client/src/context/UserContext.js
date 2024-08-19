@@ -1,12 +1,16 @@
 // UserContext.js
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import { jwtDecode } from "jwt-decode";
+import { CartContext } from './CartContext';
 
 const UserContext = createContext({});
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [decodedTokenIn, setDecodedToken] = useState({});
+  const { cart } = useContext(CartContext);
+
+  
 
   const fetchUserDetails = async (username) => {
     if(username !== undefined){
@@ -33,6 +37,8 @@ const UserProvider = ({ children }) => {
           cart: []
         });
       }, (data) => {
+
+
         
       });
     }

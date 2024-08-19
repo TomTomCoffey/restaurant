@@ -20,9 +20,6 @@ function Menu() {
 
     const groupItems = groupByCategory(items);
 
-    console.log(groupItems);
-  
-
 
     useEffect(() => {
         fetch("http://localhost:8080/api/item")
@@ -43,8 +40,7 @@ function Menu() {
         <h1 className="menu-title">Menu</h1>
         <div className="menu">
             {Object.keys(groupItems).map(category => (
-                <div key={category} className="menu-category">
-                    
+                <div key={category} className="menu-category">                  
                     <h2 className="category-title">{category}</h2>
                     <div className="menu-items">
                         {groupItems[category].map(item => (

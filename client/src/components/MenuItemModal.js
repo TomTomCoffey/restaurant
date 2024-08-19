@@ -1,5 +1,10 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
+import { CartContext } from "../context/CartContext";
+
+
+
 
 function MenuItemModal({ item, isOpen, onClose }) {
 
@@ -7,15 +12,36 @@ function MenuItemModal({ item, isOpen, onClose }) {
     const [quantity, setQuantity] = useState(1);
     const [total, setTotal] = useState(price);
     const [modifiers, setModifiers] = useState([]);
+    const { user } = useContext(UserContext);
+    const { addToCart } = useContext(CartContext);
+    const { cart } = useContext(CartContext);
+
+
+    const add = () => {
+     const order = {
+            item: item.title,
+            quantity: quantity,
+            modifiers: modifiers,
+            total: total
+     }
+        console.log(order);
+        addToCart(order);
+        console.log(cart);
+        onClose();
+    }
+    
 
 
     const updateQuantity = (e) => {
 
-  
+        if(quantity <= 0){
+            setQuantity(1);
+            setPrice(item.price)
+        }
+        else{
             setQuantity(e.target.value);
             setTotal(price * e.target.value);
-        
-  
+        }
     }
 
     const handleModifierChange = (e, modifier) => {
@@ -84,7 +110,7 @@ function MenuItemModal({ item, isOpen, onClose }) {
                     <input type="number" className="modal-quantity" value={quantity} onChange={updateQuantity} />
                    <h3>Total: ${total.toFixed(2)}</h3>
                     <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>
-                    <button type="button" className="btn btn-primary">Add to Cart</button>
+                    <button type="button" className="btn btn-primary" onClick={add}>Add to Cart</button>
                 </div>
                 <div>
             

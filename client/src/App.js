@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
+import { CartProvider } from './context/CartContext';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -10,6 +11,7 @@ function App() {
   return (
    <>
     <UserProvider>
+      <CartProvider>
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -18,6 +20,7 @@ function App() {
         <Route path="/menu" element={<Menu/>}/>
       </Routes>
     </Router>
+    </CartProvider>
     </UserProvider>
    </>
   );

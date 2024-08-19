@@ -2,16 +2,16 @@ import React from "react";
 import { UserContext,  } from "../context/UserContext";
 import { useContext } from "react";
 import { useState } from "react";
+import { CartContext } from "../context/CartContext";
 
 
 function Home() {
 
-  
-
     const { user } = useContext(UserContext);
-    console.log('From Home.js', user);
+    const {cart} = useContext(CartContext);
+    console.log('From Home.js', cart);
 
-  
+    
 
     const printSomething = () => {
         fetch('http://localhost:8080/api/printer', {
@@ -35,7 +35,7 @@ function Home() {
         <div>
         {user && <h1>Home for {user.email} </h1>}
         <button onClick={printSomething}>Print Something</button>
-        </div>
+                </div>
     );
     }
 

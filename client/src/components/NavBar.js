@@ -1,5 +1,6 @@
 
 import React from "react";
+import Cart from "./Cart";
 
 
 function NavBar() {
@@ -8,6 +9,7 @@ function NavBar() {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/">
         Navbar
+        <Cart />
       </a>
     </nav>
   );

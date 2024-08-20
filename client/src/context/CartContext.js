@@ -13,10 +13,12 @@ const CartProvider = ({ children }) => {
     const [total, setTotal] = useState(0);
 
     useEffect(() => {
-        const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-        const savedTotal = parseFloat(localStorage.getItem('total')) || 0;
-        setCart(savedCart);
-        setTotal(savedTotal);
+        const savedCart = JSON.parse(localStorage.getItem('cart'));
+        const savedTotal = parseFloat(localStorage.getItem('total'));
+        if (savedCart.length > 0 || savedTotal > 0) {
+            setCart(savedCart);
+            setTotal(savedTotal);
+        }
     }, []);
 
     useEffect(() => {
@@ -38,7 +40,6 @@ const CartProvider = ({ children }) => {
             updatedCart = [...cart, item];
         }
         setCart(updatedCart);
-        console.log(cart);
         setTotal(prevTotal => prevTotal + item.price * item.quantity);
 
     };

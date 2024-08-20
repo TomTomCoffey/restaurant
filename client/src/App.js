@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Menu from './pages/Menu';
+import NavBar from './components/NavBar';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
     <UserProvider>
       <CartProvider>
     <Router>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

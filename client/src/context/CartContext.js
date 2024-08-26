@@ -9,26 +9,23 @@ const CartContext = createContext({
 });
 
 const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState([]);
-    const [total, setTotal] = useState(0);
-
-    useEffect(() => {
-        const savedCart = JSON.parse(localStorage.getItem('cart'));
-        const savedTotal = parseFloat(localStorage.getItem('total'));
-        if (savedCart.length > 0 || savedTotal > 0) {
-            setCart(savedCart);
-            setTotal(savedTotal);
-        }
-    }, []);
+    const [cart, setCart] = useState(() => {
+        const savedCart = localStorage.getItem('cart');
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
+    const [total, setTotal] = useState(() => {
+        const savedTotal = localStorage.getItem('total');
+        return savedTotal ? parseFloat(savedTotal) : 0;
+    });
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cart));
-        localStorage.setItem('total', total.toFixed(2));
+        localStorage.setItem('total', total.toFixed(2));  
     }, [cart, total]);
 
     const addToCart = (item) => {
-        console.log(item);
-        const existingItemIndex = cart.findIndex(c => c.title === item);
+        console.log('From CartContext.js', item);
+        const existingItemIndex = cart.findIndex(c => c.title === item.item);
         let updatedCart;
         if (existingItemIndex >= 0) {
             updatedCart = cart.map((cartItem, index) => 
@@ -39,15 +36,15 @@ const CartProvider = ({ children }) => {
         } else {
             updatedCart = [...cart, item];
         }
-        setCart(updatedCart);
-        setTotal(prevTotal => prevTotal + item.price * item.quantity);
+        setCart(updatedCart);        
+        setTotal(total + (item.total));
 
     };
 
     const removeFromCart = (item) => {
         const updatedCart = cart.filter(c => c.title !== item.title);
         setCart(updatedCart);
-        setTotal(prevTotal => prevTotal - item.price * item.quantity);
+        setTotal(total - (item.total));
     };
 
     const clearCart = () => {

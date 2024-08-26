@@ -9,9 +9,15 @@ function Home() {
 
     const { user } = useContext(UserContext);
     const {cart} = useContext(CartContext);
-    console.log('From Home.js', cart);
+    const { total } = useContext(CartContext);
 
-    
+    const [order, setOrder] = useState({
+        cart: cart,
+        total: total,
+        user: user
+    });
+
+
 
     const printSomething = () => {
         fetch('http://localhost:8080/api/printer', {
@@ -20,7 +26,7 @@ function Home() {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
             },
-            body: JSON.stringify({ message: 'Hello from the client i am finally working!' })
+            body: JSON.stringify(order)
         }).then(response => response.json())
           .then(data => {
               console.log(data);

@@ -119,3 +119,12 @@ code {
 .modal-quantity{
  max-width: 50px;
 }
+
+.cart-button{
+  background-color: navy;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

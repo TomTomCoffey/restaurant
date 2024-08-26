@@ -7,20 +7,19 @@ import java.util.List;
 public class Order {
 
     private User user;
-    private List<Item> items;
+    private List<OrderItem> items;
     private LocalDateTime orderTime;
     private BigDecimal cost;
 
-    public Order(){}
+    public Order() {
+    }
 
-    public Order(User user, List<Item> items, LocalDateTime orderTime, BigDecimal cost) {
+    public Order(User user, List<OrderItem> items, LocalDateTime orderTime, BigDecimal cost) {
         this.user = user;
         this.items = items;
         this.orderTime = orderTime;
         this.cost = cost;
     }
-
-
 
     public User getUser() {
         return user;
@@ -30,11 +29,11 @@ public class Order {
         this.user = user;
     }
 
-    public List<Item> getItems() {
+    public List<OrderItem> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(List<OrderItem> items) {
         this.items = items;
     }
 
@@ -54,5 +53,13 @@ public class Order {
         this.cost = cost;
     }
 
-
+    @Override
+    public String toString() {
+        return "Order{" +
+                "user=" + user +
+                ", items=" + items +
+                ", orderTime=" + orderTime +
+                ", cost=" + cost +
+                '}';
+    }
 }

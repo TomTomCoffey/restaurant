@@ -88,4 +88,6 @@ public class User {
     public void setBanned(boolean banned) {
         isBanned = banned;
     }
+
+
 }

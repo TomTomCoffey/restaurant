@@ -144,7 +144,7 @@ use lunch;
 
 
     insert into submodifier(modifier_id, item_id) values
-    (1, 1), -- Western Sandwich
+    (1, 1),-- Western Sandwich
     (2, 1),
     (3, 1),
     (4, 1),
@@ -500,7 +500,7 @@ use lunch;
     (18, 32),
     (34, 32),
     (48, 32),
-    (49, 52),
+    (49, 32),
     (50, 32),
     (51, 32),
     (52, 32),
@@ -565,4 +565,4 @@ use lunch;
     (64, 40),
     (65, 40);
 
-    COMMIT;
+    COMMIT; 

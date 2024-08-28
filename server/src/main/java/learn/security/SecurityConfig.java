@@ -58,8 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/modifiers").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/modifiers/*").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/modifiers/*").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/api/printer").hasAnyRole("USER", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/api/printer").hasAnyRole("USER", "ADMIN")
+               // .antMatchers(HttpMethod.GET, "/api/printer").hasAnyRole("USER", "ADMIN")
+               // .antMatchers(HttpMethod.POST, "/api/printer").hasAnyRole("USER", "ADMIN")
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(), converter))
                 .sessionManagement() // 4

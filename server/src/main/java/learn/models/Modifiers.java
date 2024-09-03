@@ -7,9 +7,18 @@ public class Modifiers {
     private String name;
     private BigDecimal price;
     private boolean disabled;
+    private ModifiersCategory modifiersCategory;
 
 
     public Modifiers(){}
+
+    public Modifiers(int modifier_id, String name, BigDecimal price, boolean disabled, ModifiersCategory modifiersCategory) {
+        this.modifier_id = modifier_id;
+        this.name = name;
+        this.price = price;
+        this.disabled = disabled;
+        this.modifiersCategory = modifiersCategory;
+    }
 
     public Modifiers(int modifier_id, String name, BigDecimal price, boolean disabled) {
         this.modifier_id = modifier_id;
@@ -48,6 +57,15 @@ public class Modifiers {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+
+    public ModifiersCategory getModifiersCategory() {
+        return modifiersCategory;
+    }
+
+    public void setModifiersCategory(ModifiersCategory modifiersCategory) {
+        this.modifiersCategory = modifiersCategory;
     }
 
     @Override

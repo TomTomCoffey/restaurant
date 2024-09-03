@@ -2,9 +2,11 @@ package learn.data;
 
 import learn.data.mappers.CategoryMapper;
 import learn.data.mappers.ItemMapper;
+import learn.data.mappers.ModifiersCategoryMapper;
 import learn.data.mappers.ModifiersMapper;
 import learn.models.Item;
 import learn.models.Modifiers;
+import learn.models.ModifiersCategory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -225,6 +227,12 @@ public class ItemJdbcRepository implements ItemRepository {
         item.setCategory(findCategory(item));
         item.setModifiers(findModifiersByItemId(item.getItemId()));
 
+        for(Modifiers m : item.getModifiers()){
+            m.setModifiersCategory(findModifierCategory(m.getModifier_id()));
+        }
+
+
+
     }
 
     private Category findCategory(Item item){
@@ -232,6 +240,20 @@ public class ItemJdbcRepository implements ItemRepository {
         final String sql = "SELECT category_id, category_name FROM category WHERE category_id = ?;";
 
         return jdbcTemplate.query(sql, new CategoryMapper(), item.getCategory().getCategoryId()).stream().findFirst().orElse(null);
+    }
+
+    private ModifiersCategory findModifierCategory(int modifier_id){
+
+        System.out.println(modifier_id);
+        final String sql = "SELECT cm.category_modifiers_id AS category_modifiers_id, " +
+                " category_modifiers_title, " +
+                "        category_modifiers_required " +
+                "FROM modifiers m " +
+                "JOIN category_modifiers cm ON m.category_modifiers_id = cm.category_modifiers_id " +
+                "WHERE m.modifier_id = ? ;";
+
+        return jdbcTemplate.query(sql, new ModifiersCategoryMapper(), modifier_id).stream().findFirst().orElse(null);
+
     }
     private List<Modifiers> findModifiersByItemId(int itemId){
         final String sql = "SELECT  " +

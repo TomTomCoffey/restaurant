@@ -35,12 +35,25 @@ create table item(
     references category(category_id)
 );
 
+create table category_modifiers(
+    category_modifiers_id int primary key auto_increment,
+    category_modifiers_title varchar(50) not null,
+    category_modifiers_required boolean not null
+);
+
 create table modifiers(
     modifier_id int primary key auto_increment,
     modifier_name varchar(50) not null,
     modifier_price decimal(10, 2) not null,
-    modifier_disabled boolean default false
+    modifier_disabled boolean default false,
+    category_modifiers_id int not null,
+    constraint fk_modifiers_category_modifiers_id
+    foreign key(category_modifiers_id)
+    references category_modifiers(category_modifiers_id)
+  
 );
+
+
 
 create table submodifier(
     submodifier_id int primary key auto_increment,

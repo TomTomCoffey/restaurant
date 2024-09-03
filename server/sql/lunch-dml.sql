@@ -60,81 +60,98 @@ use lunch;
     ('Bottled Water', '', 2.75,'temp.jpg', 4), -- 43
     ('Small Jar 16 ounce', '', 9.00,'temp.jpg', 5), -- 44
     ('Large Jar 25 ounce', '', 13.00,'temp.jpg', 5); -- 45
+    
 
 
     COMMIT;
 
 
+    insert into category_modifiers(category_modifiers_title, category_modifiers_required) values
+    ('Bread Choice', true), -- 1
+    ('Toppings Choice', false), -- 2
+    ('Eggs', false), -- 3
+    ('Eggs Cooked', true), -- 4
+    ('Meats', false), -- 5
+    ('Remove Toppings', false), -- 6
+    ('Size', true), -- 7
+    ('Drinks', true), -- 8
+    ('Toasted', true), -- 9
+    ('Sides', false); -- 10
+  
 
 
 
 
-    insert into modifiers(modifier_name, modifier_price) values
-    ('English Muffin', 1.00),  -- 1
-    ('Hard Roll', 1.00), -- 2
-    ('Toasted', 0.00), -- 3 
-    ('Not Toasted', 0.00), -- 4
-    ('Rye', 0.00), -- 5
-    ('White', 0.00), -- 6
-    ('Wheat', 0.00), -- 7
-    ('Extra Egg', 1.00), -- 8
-    ('2 Extra Eggs', 2.00), -- 9
-    ('3 Extra Eggs', 3.00), -- 10
-    ('4 Extra Eggs', 4.00), -- 11
-    ('5 Extra Eggs', 5.00), -- 12
-    ('Home Fries in Sandwich', 1.00), -- 13
-    ('Sausage', 2.50), -- 14
-    ('Bacon', 2.50),  -- 15
-    ('Ham', 2.50), -- 16
-    ('Lettuce', 0.50), -- 17
-    ('Tomato', 0.50), -- 18
-    ('Texas Sauce', 0.50), -- 19
-    ('Jelly', 0.50), -- 20
-    ('Egg White', 1.00), -- 21
-    ('Melted Cheddar Cheese', 1.25), -- 22
-    ('White American Cheese Slice', 1.25), -- 23
-    ('Blueberry Muffin', 0.00), -- 24
-    ('Corn Muffin', 0.00), -- 25
-    ('No Bacon', 0.00), -- 26
-    ('No Onions', 0.00), -- 27
-    ('No Sauce', 0.00), -- 28
-    ('***** SUB BBQ for Buffalo *****', 0.00), -- 29
-    ('Extra Bacon', 2.00), -- 30
-    ('Texas Sauce', 1.50), -- 31
-    ('Melted Cheddar Cheese', 1.00), -- 32
-    ('White American Cheese Slice', 1.00), -- 33
-    ('Mayonnaise', 0.00), -- 34
-    ('BBQ', 0.00), -- 35
-    ('Honey Mustard', 0.00), -- 36
-    ('Ranch', 0.00), -- 37
-    ('Onions', 0.00), -- 38
-    ('Grits', 2.00), -- 39
-    ('Home Fries', 2.00), -- 40
-    ('Over Easy', 0.00), -- 41
-    ('Over Medium', 0.00), -- 42
-    ('Over Hard', 0.00), -- 43
-    ('Scrambled', 0.00), -- 44
-    ('Sunny Side Up', 0.00), -- 45
-    ('Bacon Bits', 1.25), -- 46
-    ('Texas Sauce', 0.00), -- 47
-    ('Mustard', 0.00), -- 48
-    ('Sauerkraut', 0.00), -- 49
-    ('Ketchup', 0.00), -- 50
-    ('Heavy Onions', 0.50), -- 51
-    ('Heavy Texas Sauce', 0.50), -- 52
-    ('Relish', 0.00), -- 53
-    ('Split Well Done', 0.00), -- 54
-    ('Bacon', 1.25), -- 55
-    ('Extra Cheese', 1.00), -- 56
-    ('Pepsi', 0.00), -- 57
-    ('Diet Pepsi', 0.00), -- 58
-    ('Mountain Dew', 0.00), -- 59
-    ('Rootbeer', 0.00), -- 60
-    ('Diet Rootbeer', 0.00), -- 61
-    ('Starry', 0.00), -- 62
-    ('Ginger Ale', 0.00), -- 63
-    ('Orange', 0.00), -- 64
-    ('Diet Orange', 0.00); -- 65
+
+
+
+
+    insert into modifiers(modifier_name, modifier_price, category_modifiers_id) values
+    ('English Muffin', 1.00, 1),  -- 1
+    ('Hard Roll', 1.00, 1), -- 2
+    ('Toasted', 0.00, 9), -- 3 
+    ('Not Toasted', 0.00, 9), -- 4
+    ('Rye', 0.00, 1), -- 5
+    ('White', 0.00, 1), -- 6
+    ('Wheat', 0.00, 1), -- 7
+    ('Extra Egg', 1.00, 3), -- 8
+    ('2 Extra Eggs', 2.00, 3), -- 9
+    ('3 Extra Eggs', 3.00, 3), -- 10
+    ('4 Extra Eggs', 4.00, 3), -- 11
+    ('5 Extra Eggs', 5.00, 3), -- 12
+    ('Home Fries in Sandwich', 1.00, 2), -- 13
+    ('Sausage', 2.50, 5), -- 14
+    ('Bacon', 2.50, 5),  -- 15
+    ('Ham', 2.50, 5), -- 16
+    ('Lettuce', 0.50, 2), -- 17
+    ('Tomato', 0.50, 2), -- 18
+    ('Texas Sauce', 0.50, 2), -- 19
+    ('Jelly', 0.50, 2), -- 20
+    ('Egg White', 1.00, 4), -- 21
+    ('Melted Cheddar Cheese', 1.25, 2), -- 22
+    ('White American Cheese Slice', 1.25, 2), -- 23
+    ('Blueberry Muffin', 0.00, 1), -- 24
+    ('Corn Muffin', 0.00, 1), -- 25
+    ('No Bacon', 0.00, 6), -- 26
+    ('No Onions', 0.00, 6), -- 27
+    ('No Sauce', 0.00, 6), -- 28
+    ('***** SUB BBQ for Buffalo *****', 0.00, 6), -- 29
+    ('Extra Bacon', 2.00, 2), -- 30
+    ('Texas Sauce', 1.50, 2), -- 31
+    ('Melted Cheddar Cheese', 1.00, 2), -- 32
+    ('White American Cheese Slice', 1.00, 2), -- 33
+    ('Mayonnaise', 0.00, 2), -- 34
+    ('BBQ', 0.00, 2), -- 35
+    ('Honey Mustard', 0.00, 2), -- 36
+    ('Ranch', 0.00, 2), -- 37
+    ('Onions', 0.00, 2), -- 38
+    ('Grits', 2.00, 10), -- 39
+    ('Home Fries', 2.00, 10), -- 40
+    ('Over Easy', 0.00, 4), -- 41
+    ('Over Medium', 0.00, 4), -- 42
+    ('Over Hard', 0.00, 4), -- 43
+    ('Scrambled', 0.00, 4), -- 44
+    ('Sunny Side Up', 0.00, 4), -- 45
+    ('Bacon Bits', 1.25, 2), -- 46
+    ('Texas Sauce', 0.00, 2), -- 47
+    ('Mustard', 0.00, 2), -- 48
+    ('Sauerkraut', 0.00, 2), -- 49
+    ('Ketchup', 0.00, 2), -- 50
+    ('Heavy Onions', 0.50, 2), -- 51
+    ('Heavy Texas Sauce', 0.50, 2), -- 52
+    ('Relish', 0.00, 2), -- 53
+    ('Split Well Done', 0.00, 2), -- 54
+    ('Bacon', 1.25, 2), -- 55
+    ('Extra Cheese', 1.00, 2), -- 56
+    ('Pepsi', 0.00, 8), -- 57
+    ('Diet Pepsi', 0.00, 8), -- 58
+    ('Mountain Dew', 0.00, 8), -- 59
+    ('Rootbeer', 0.00, 8), -- 60
+    ('Diet Rootbeer', 0.00, 8), -- 61
+    ('Starry', 0.00, 8), -- 62
+    ('Ginger Ale', 0.00, 8), -- 63
+    ('Orange', 0.00, 8), -- 64
+    ('Diet Orange', 0.00, 8); -- 65
 
 
        COMMIT;

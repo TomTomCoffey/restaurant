@@ -1,0 +1,60 @@
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+}
+
+.modal-body {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.modifier-category {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.modifier-category.required::after {
+    content: " (Required)";
+    color: red;
+    font-size: 0.9em;
+}
+
+.modifier-option {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.modifier-option input {
+    margin-right: 10px;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-control button {
+    padding: 5px 10px;
+    font-size: 1.2em;
+}
+
+.quantity-control input {
+    text-align: center;
+    width: 50px;
+    margin: 0 10px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #dee2e6;
+    padding-top: 10px;
+}
+
+
+

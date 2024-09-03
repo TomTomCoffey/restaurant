@@ -79,13 +79,13 @@ code {
   width: 90px;
 }
 
-.menu-modifiers{
+/* .menu-modifiers{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 10px;
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .modal-header {
   display: flex;
@@ -112,7 +112,7 @@ code {
 }
 
 .modal-body{
-  max-height: 70vh; 
+  max-height: 80vh; 
   overflow-y: auto; 
 }
 

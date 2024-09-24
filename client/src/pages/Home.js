@@ -3,6 +3,7 @@ import { UserContext,  } from "../context/UserContext";
 import { useContext } from "react";
 import { useState } from "react";
 import { CartContext } from "../context/CartContext";
+import PayPalButton from "../components/PayPalButton";
 
 
 function Home() {
@@ -38,10 +39,12 @@ function Home() {
 
 
     return (
-        <div>
-        {user && <h1>Home for {user.email} </h1>}
-        <button onClick={printSomething}>Print Something</button>
-                </div>
+      <>
+        <div className="container" id="payment-form">
+        <PayPalButton/>
+        </div>
+      </>
+
     );
     }
 

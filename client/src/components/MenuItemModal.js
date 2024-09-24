@@ -27,12 +27,12 @@ function MenuItemModal({ item, isOpen, onClose }) {
     };
 
     const groupModifiers = groupByModifierCategory(item);
-
     const handleModifierChange = (e, modifier, category) => {
         const modifierPriceChange = e.target.checked ? modifier.price : -modifier.price;
 
         if (category.required) {
             if (e.target.checked) {
+                
                const temp = modifiers.filter(m => m.modifiersCategory.name === modifier.modifiersCategory.name);
                console.log(temp);
                if( temp.length > 0){

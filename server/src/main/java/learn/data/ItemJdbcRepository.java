@@ -230,9 +230,6 @@ public class ItemJdbcRepository implements ItemRepository {
         for(Modifiers m : item.getModifiers()){
             m.setModifiersCategory(findModifierCategory(m.getModifier_id()));
         }
-
-
-
     }
 
     private Category findCategory(Item item){
@@ -243,7 +240,7 @@ public class ItemJdbcRepository implements ItemRepository {
     }
 
     private ModifiersCategory findModifierCategory(int modifier_id){
-        
+
         final String sql = "SELECT cm.category_modifiers_id AS category_modifiers_id, " +
                 " category_modifiers_title, " +
                 "        category_modifiers_required " +

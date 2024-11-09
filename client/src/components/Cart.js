@@ -4,41 +4,22 @@ import { useState, useContext } from "react";
 
 import { UserContext } from "../context/UserContext";
 import { CartContext } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
 
     const { user } = useContext(UserContext);
     const { cart, removeFromCart } = useContext(CartContext);
     const { total } = useContext(CartContext);
+    const navigate = useNavigate();
 
-  
+    const placeOrder = (e) => {
+        e.preventDefault();
+        navigate("/order");
+        
 
-
-
-    const placeOrder = (event) => {
-        event.preventDefault();
-     
-        fetch('http://localhost:8080/api/printer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('jwtToken')
-            },
-            body: JSON.stringify({
-                user: user,
-                items: cart,
-                time: null,
-                cost: total
-             })
-        }).then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error(error);
-            }
-            );  
     }
+
 
 
     return (

@@ -73,10 +73,12 @@ public class PrinterController {
     public String formatOrderReceipt(Order order) {
         StringBuilder receipt = new StringBuilder();
 
+
+
         receipt.append("============================================================\n")
                 .append("                     Tony's Newburgh Lunch                  \n")
                 .append("============================================================\n")
-                .append("Customer: ").append(order.getUser().getLastName()).append("\n")
+                .append("Customer: ").append(order.getUser().getFirstName()).append(" ").append(order.getUser().getLastName()).append("\n")
                 .append("Order Time: ").append(order.getOrderTime().toString().replace("T", " ")).append("\n")
                 .append("------------------------------------------------------------\n")
                 .append("Items Ordered:\n")

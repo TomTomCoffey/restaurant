@@ -77,13 +77,6 @@ use lunch;
     ('Drinks', true), -- 8
     ('Toasted', true), -- 9
     ('Sides', false); -- 10
-  
-
-
-
-
-
-
 
 
     insert into modifiers(modifier_name, modifier_price, category_modifiers_id) values

@@ -14,7 +14,6 @@ const PayPalButton = () => {
 });
 
   useEffect(() => {
-
     console.log('paypal useeffect firing');
 
    
@@ -36,6 +35,7 @@ const PayPalButton = () => {
             onApprove: function (data, actions) {
             return actions.order.capture().then(function (details) {
                 console.log(details);
+                console.log(details.payer.name.given_name);
                 fetch('http://localhost:8080/api/printer', {
                 method: 'POST',
                 headers: {
@@ -44,7 +44,14 @@ const PayPalButton = () => {
                 },
                 body: JSON.stringify({
                     user: {
-                        lastName: details.payer.name.surname                     
+                        userId: null,
+                        username: null,
+                        firstName: details.payer.name.given_name,
+                        lastName: details.payer.name.surname,
+                        email: details.payer.email,
+                        hashedPassword: null,
+                        roles: null,
+                        isBanned: null,
                     },
                     items: cart,
                     time: null,

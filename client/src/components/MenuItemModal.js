@@ -133,16 +133,16 @@ function MenuItemModal({ item, isOpen, onClose }) {
                     </div>
                     <div className="modal-footer">
                         <div className="quantity-control">
-                          <button onClick={() => updateQuantity({ target: { value: quantity - 1 } })}>-</button>
-                          <input type="number" className="modal-quantity" value={quantity} onChange={updateQuantity} />
-                          <button onClick={() => updateQuantity({ target: { value: quantity + 1 } })}>+</button>
+                          <button  className="quantity-button"onClick={() => updateQuantity({ target: { value: quantity - 1 } })}>-</button>
+                          <h5> { quantity } </h5>
+                          <button className="quantity-button"onClick={() => updateQuantity({ target: { value: quantity + 1 } })}>+</button>
                          </div>
                  <div className="total-amount">
                         Total: ${total.toFixed(2)}
                  </div>
-                 <div>
-                  <button type="button" className="btn btn-secondary" onClick={closeModel}>Cancel</button>
-                  <button type="button" className="btn btn-primary" onClick={add}>Add to Cart</button>
+                 <div className="button-container">
+                  <button type="button" className="btn btn-secondary" id=""  onClick={closeModel}>Cancel</button>
+                  <button type="button" className="btn btn-primary" id="btn" onClick={add}>Add to Cart</button>
                 </div>
                 </div>
                 </div>

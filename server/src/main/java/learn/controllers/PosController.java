@@ -1,48 +1,51 @@
 package learn.controllers;
 
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import org.springframework.web.bind.annotation.*;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+
 @RestController
-//@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping("/api/pos/printer")
 public class PosController {
 
-
     @PostMapping("/print")
-    public ResponseEntity<String> printOrder(@RequestBody String order){
-        String printerUrl = "http://printer-ip/WebPRNT/commands";
+    public ResponseEntity<String> printOrder(@RequestBody String order) {
+        String printerIp = "192.168.0.12"; /// current ip
+        int port = 8000;
 
-        // Prepare the ESC/POS commands
-        String printData = generatePrintData();
+        try (Socket socket = new Socket(printerIp, port);
+             OutputStream out = socket.getOutputStream()) {
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "text/plain");
-        HttpEntity<String> entity = new HttpEntity<>(printData, headers);
+            // Prepare the ESC/POS commands
+            String printData = generatePrintData();
+            out.write(printData.getBytes(StandardCharsets.UTF_8));
+            out.flush();
 
-        RestTemplate restTemplate = new RestTemplate();
-
-        return restTemplate.exchange(printerUrl, HttpMethod.POST, entity, String.class);
+            return ResponseEntity.ok("Printed successfully did it print?!?!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Printing failed: " + e.getMessage());
+        }
     }
+
     private String generatePrintData() {
-        // Generate your ESC/POS formatted print data here
         StringBuilder sb = new StringBuilder();
         sb.append((char) 0x1B); // ESC
         sb.append("@");         // Initialize printer
-        sb.append("Hello World!"); // Your print data
+        sb.append("Hello Tony!"); ///this is where i can start printing
         sb.append((char) 0x0A); // Newline
         sb.append((char) 0x1D); // GS
         sb.append("V");         // Cut
         sb.append((char) 0x00); // Full cut
         return sb.toString();
     }
-
 }

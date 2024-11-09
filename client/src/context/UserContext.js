@@ -8,7 +8,7 @@ const UserContext = createContext({});
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [decodedTokenIn, setDecodedToken] = useState({});
-  const { cart } = useContext(CartContext);
+ 
 
   
 

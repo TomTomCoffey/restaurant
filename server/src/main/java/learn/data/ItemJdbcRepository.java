@@ -222,6 +222,34 @@ public class ItemJdbcRepository implements ItemRepository {
         return jdbcTemplate.update(sql, percentage, categoryId) > 0;
     }
 
+    @Override
+    public boolean updateItemRank(int itemId) {
+        final String sql = "UPDATE item SET " +
+                "item_rank = item_rank + 1 " +
+                "WHERE item_id = ?;";
+
+        return jdbcTemplate.update(sql, itemId) > 0;
+    }
+
+    @Override
+    public List<Item> findTop5Rank() {
+        final String sql = "SELECT " +
+                " item_id," +
+                "    item_title, " +
+                "    item_description, " +
+                "    item_price, " +
+                "    item_disabled, " +
+                "    item_photo, " +
+                "    category_id, " +
+                " item_rank " +
+                " FROM item " +
+                " ORDER BY item_rank DESC LIMIT 5 ; ";
+
+        return  jdbcTemplate.query(sql, new ItemMapper());
+
+
+    }
+
 
     private void fillFields(Item item){
         item.setCategory(findCategory(item));

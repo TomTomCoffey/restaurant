@@ -30,6 +30,7 @@ create table item(
     item_photo varchar(250),
     item_disabled boolean default false,
     category_id int not null,
+    item_rank int not null default 0,
     constraint fk_item_category_id
     foreign key(category_id)
     references category(category_id)

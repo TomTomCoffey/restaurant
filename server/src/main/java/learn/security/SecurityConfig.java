@@ -41,6 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/item", "/api/item/*").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/item").hasAnyRole( "ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/item/*").hasAnyRole( "ADMIN")
+                //.antMatchers(HttpMethod.PUT, "/api/item/*").permitAll()
+                .antMatchers(HttpMethod.PUT, "/api/item/rank/id/*").permitAll()
                 .antMatchers(HttpMethod.PUT, "/api/item/category/enable/*").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/item/category/disable/*").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/item/*").hasAnyRole( "ADMIN")
@@ -72,5 +74,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
- 
+
 }

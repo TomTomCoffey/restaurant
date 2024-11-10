@@ -28,6 +28,10 @@ public class ItemService {
         return repository.findAll();
     }
 
+    public List<Item> findTop5Rank(){
+        return repository.findTop5Rank();
+    }
+
     public Item findById(int id){
         return repository.findById(id);
     }
@@ -87,6 +91,18 @@ public class ItemService {
         result.setPayload(item);
 
         return result;
+
+    }
+    public Result<Item> updateItemRank(int id){
+        Result<Item> result = new Result<>();
+
+        Item item = repository.findById(id);
+
+        if(item == null){
+            result.addMessage("No item was found to update rank", ResultType.NOT_FOUND);
+        }
+        return result;
+
 
     }
 

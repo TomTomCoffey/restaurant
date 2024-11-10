@@ -27,6 +27,11 @@ public class ItemController {
         return service.findAll();
     }
 
+    @GetMapping("/rank")
+    public List<Item> findByTop5Rank(){
+        return service.findTop5Rank();
+   }
+
     @GetMapping("/id/{itemId}")
     public ResponseEntity<Item> findById(@PathVariable int itemId){
         Item item = service.findById(itemId);
@@ -64,6 +69,17 @@ public class ItemController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return ErrorResponse.build(result);
+    }
+
+    @PutMapping("/rank/id/{itemId)")
+    public ResponseEntity<Object> updateRank(@PathVariable int id){
+        Result<Item> result = service.updateItemRank(id);
+        if(result.isSuccess()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return ErrorResponse.build(result);
+
+
     }
     @PutMapping("/category/enable/{id}")
     public ResponseEntity<Object> enableCategory(@PathVariable int id){

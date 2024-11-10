@@ -6,6 +6,11 @@ GET {{url}} HTTP/1.1
 
 ###
 
+###
+GET {{url}}/rank HTTP/1.1
+
+###
+
 GET {{url}}/id/8 HTTP/1.1
 
 ###
@@ -68,6 +73,9 @@ Content-Type: application/json
       }
      ]
 }
+
+###
+PUT {{url}}/rank/id/1
 
 ###
 PUT {{url}}/category/enable/1 HTTP/1.1

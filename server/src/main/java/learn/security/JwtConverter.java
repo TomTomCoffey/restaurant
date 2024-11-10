@@ -1,10 +1,13 @@
 package learn.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Date;
@@ -14,7 +17,20 @@ import java.util.stream.Collectors;
 @Component
 public class JwtConverter {
 
-    private Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+//
+    private Key key;
+//
+    @PostConstruct  ///this annotation runs the method so soon as beans are set up
+    public void innt(){
+        if (jwtSecret == null || jwtSecret.trim().isEmpty()) {
+            throw new IllegalStateException("JWT secret must be provided.");
+        }
+        this.key = Keys.hmacShaKeyFor(jwtSecret.getBytes()); ////get the key from jwt secret env
+    }
+
+  //  private Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);  ////use this for development not prod
     // 2. "Configurable" constants
     private final String ISSUER = "restaurant";
     private final int EXPIRATION_MINUTES = 60;

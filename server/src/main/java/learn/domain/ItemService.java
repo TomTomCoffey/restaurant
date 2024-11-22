@@ -93,13 +93,17 @@ public class ItemService {
         return result;
 
     }
-    public Result<Item> updateItemRank(int id){
+    public Result<Item> updateItemRank(int id, int rank){
         Result<Item> result = new Result<>();
 
         Item item = repository.findById(id);
 
         if(item == null){
             result.addMessage("No item was found to update rank", ResultType.NOT_FOUND);
+        }
+        boolean expected = repository.updateItemRank(id, rank);
+        if(!expected){
+            result.addMessage("Something went wrong in the database", ResultType.INVALID);
         }
         return result;
 

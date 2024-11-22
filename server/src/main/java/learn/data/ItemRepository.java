@@ -25,7 +25,7 @@ public interface ItemRepository {
 
     public boolean changePriceByCategory(double percentage, int categoryId);
 
-    public boolean updateItemRank(int itemId);
+    public boolean updateItemRank(int itemId, int rank);
 
     public List<Item> findTop5Rank();
 }

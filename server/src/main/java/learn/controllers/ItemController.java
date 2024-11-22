@@ -1,6 +1,4 @@
 package learn.controllers;
-
-
 import learn.domain.ItemService;
 import learn.domain.Result;
 import learn.models.Item;
@@ -71,9 +69,9 @@ public class ItemController {
         return ErrorResponse.build(result);
     }
 
-    @PutMapping("/rank/id/{itemId)")
-    public ResponseEntity<Object> updateRank(@PathVariable int id){
-        Result<Item> result = service.updateItemRank(id);
+    @PutMapping("/rank/{itemId)")
+    public ResponseEntity<Object> updateRank(@PathVariable int id, @RequestBody int rank){
+        Result<Item> result = service.updateItemRank(id, rank);
         if(result.isSuccess()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }

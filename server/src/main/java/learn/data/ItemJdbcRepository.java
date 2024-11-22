@@ -223,27 +223,20 @@ public class ItemJdbcRepository implements ItemRepository {
     }
 
     @Override
-    public boolean updateItemRank(int itemId) {
+    public boolean updateItemRank(int itemId, int rank) {
         final String sql = "UPDATE item SET " +
-                "item_rank = item_rank + 1 " +
+                "item_rank = item_rank + ? " +
                 "WHERE item_id = ?;";
 
-        return jdbcTemplate.update(sql, itemId) > 0;
+        return jdbcTemplate.update(sql,rank, itemId) > 0;
     }
 
     @Override
     public List<Item> findTop5Rank() {
-        final String sql = "SELECT " +
-                " item_id," +
-                "    item_title, " +
-                "    item_description, " +
-                "    item_price, " +
-                "    item_disabled, " +
-                "    item_photo, " +
-                "    category_id, " +
-                " item_rank " +
-                " FROM item " +
-                " ORDER BY item_rank DESC LIMIT 5 ; ";
+        final String sql = "SELECT * " +
+                "FROM item " +
+                "ORDER BY item_rank DESC " +
+                "LIMIT 5;";
 
         return  jdbcTemplate.query(sql, new ItemMapper());
 

@@ -80,3 +80,9 @@ create table user_role (
     foreign key (role_id)
     references app_role(role_id)
 );
+
+create table revenue (
+    revenue_id int auto_increment,
+    revenue_in decimal(10, 2),
+    revenue_day date
+);

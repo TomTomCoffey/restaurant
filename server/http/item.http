@@ -75,7 +75,7 @@ Content-Type: application/json
 }
 
 ###
-PUT {{url}}/rank/id/1
+PUT {{url}}/rank/1
 
 ###
 PUT {{url}}/category/enable/1 HTTP/1.1

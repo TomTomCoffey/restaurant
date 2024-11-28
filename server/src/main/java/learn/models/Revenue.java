@@ -8,6 +8,8 @@ public class Revenue {
     private BigDecimal revenue;
     private LocalDate date;
 
+    public Revenue(){}
+
     public Revenue(BigDecimal revenue, LocalDate date) {
         this.revenue = revenue;
         this.date = date;

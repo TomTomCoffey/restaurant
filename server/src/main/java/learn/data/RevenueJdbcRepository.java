@@ -30,6 +30,7 @@ public class RevenueJdbcRepository implements RevenueRepository {
                 "    revenue_day " +
                 "FROM revenue " +
                 "GROUP BY revenue_day " +
+                "ORDER BY revenue_day " +
                 "LIMIT 7;";
         return jdbcTemplate.query(sql, new RevenueMapper());
     }

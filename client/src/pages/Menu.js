@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo} from "react";
 import MenuItem from "../components/MenuItem";
 
 
@@ -18,7 +18,8 @@ function Menu() {
         return groupedItems;
     }
 
-    const groupItems = groupByCategory(items);
+    const groupItems = useMemo(() => groupByCategory(items), [items]);
+
 
 
     useEffect(() => {

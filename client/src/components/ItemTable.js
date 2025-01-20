@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   Table,
   TableCell,
@@ -48,8 +48,8 @@ function ItemTable() {
   };
 
  
+  const groupedItems = useMemo(() => groupByCategory(items), [items]);
 
-  const groupedItems = groupByCategory(items);
 
   // Toggle visibility for a specific category
   const toggleCategory = (categoryName) => {
@@ -72,7 +72,7 @@ function ItemTable() {
               <TableCell>Category</TableCell>
               <TableCell></TableCell>
               <TableCell align="center"></TableCell>
-              <TableCell align="center"></TableCell>
+              <TableCell align="center">Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -97,17 +97,17 @@ function ItemTable() {
                     <strong>{categoryName}</strong>
                   </TableCell>
                   <TableCell align="center">
-                    {groupedItems[categoryName][0].category.disabled? "Disabled" : "Active"}
+                    <strong>{groupedItems[categoryName][0].category.disabled? "Disabled" : "Active"}</strong>
                     </TableCell>
                     <TableCell align="center">
                     <Button
                                   variant="contained"
-                                  color={groupedItems[categoryName][0].category.disabled? "secondary" : "primary"}
+                                  color={groupedItems[categoryName][0].category.disabled? "primary" : "secondary"}
                                   onClick={() =>
                                   console.log("Hello World")
                                   }
                                 >
-                                  {groupedItems[categoryName][0].category.disabled?"Disable" : "Enable"}
+                                  {groupedItems[categoryName][0].category.disabled?"Enable" : "Disable"}
                                 </Button>
                         </TableCell>
 
@@ -129,19 +129,19 @@ function ItemTable() {
                               <TableCell />
                               <TableCell>{item.title}</TableCell>
                               <TableCell align="center">
-                                {item.disabled? "Active" : "Disabled"}
+                                {item.disabled? "Disabled" : "Active"}
                               </TableCell>
                               <TableCell align="center">
                                 <Button
                                   variant="contained"
-                                  color={item.disabled? "secondary" : "primary"}
+                                  color={item.disabled? "primary": "secondary"}
                                   onClick={() =>
                                     console.log(
                                       `Toggle active state for ${item.title}`
                                     )
                                   }
                                 >
-                                  {item.disabled ? "Disable" : "Enable"}
+                                  {item.disabled ? "Enable" : "Disable"}
                                 </Button>
                               </TableCell>
                             </TableRow>

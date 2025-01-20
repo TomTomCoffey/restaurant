@@ -22,7 +22,7 @@ public class CategoryJdbcRepository implements CategoryRepository {
 
     @Override
     public List<Category> findAll() {
-       final String sql = "SELECT category_id, category_name FROM category; ";
+       final String sql = "SELECT category_id, category_name, category_disabled FROM category; ";
 
        return jdbcTemplate.query(sql, new CategoryMapper());
     }

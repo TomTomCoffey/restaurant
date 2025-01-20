@@ -59,6 +59,59 @@ function ItemTable() {
     }));
   };
 
+  const enableCategory = (categoryId) =>{
+    console.log(categoryId);
+    fetch(`http://localhost:8080/api/item/category/enable/${categoryId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+            
+        if (response.ok) {
+          // Handle success
+          console.log('Category enabled successfully');
+          // Optionally, you can refresh the items or update the state here
+        } else {
+          // Handle error
+          console.error('Failed to enable category');
+        }
+     })
+  }
+
+  const disableCategory = (categoryId) => {
+    console.log(categoryId);
+    fetch(`http://localhost:8080/api/item/category/disable/${categoryId}`, {
+            
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+     }).then((response) => {
+                
+          if (response.ok) {
+             // Handle success
+             console.log('Category disabled successfully');
+             // Optionally, you can refresh the items or update the state here
+          } else {
+             // Handle error
+             console.error('Failed to disable category');
+          }
+      })
+
+  }
+
+  const enableItem = (item) => {
+    console.log(item);
+  };
+
+  const disableItem = (item) => {
+    
+        console.log(item);
+};
+    
+       
+
   return (
     <>
       <h1 className="menu-title">
@@ -103,11 +156,13 @@ function ItemTable() {
                     <Button
                                   variant="contained"
                                   color={groupedItems[categoryName][0].category.disabled? "primary" : "secondary"}
-                                  onClick={() =>
-                                  console.log("Hello World")
-                                  }
+                                  onClick={() => {       
+                                    groupedItems[categoryName][0].category.disabled? enableCategory(groupedItems[categoryName][0].category.categoryId) : disableCategory(groupedItems[categoryName][0].category.categoryId)
+                               }
+                               }
                                 >
                                   {groupedItems[categoryName][0].category.disabled?"Enable" : "Disable"}
+                                
                                 </Button>
                         </TableCell>
 

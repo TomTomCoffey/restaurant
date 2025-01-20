@@ -28,8 +28,11 @@ function ItemTable() {
       })
       .then((data) => {
         setItems(data);
+        console.log(data);
       })
       .catch((error) => console.error(error));
+     
+
   }, []);
 
   // Group items by category
@@ -43,6 +46,8 @@ function ItemTable() {
     });
     return groupedItems;
   };
+
+ 
 
   const groupedItems = groupByCategory(items);
 
@@ -92,12 +97,21 @@ function ItemTable() {
                     <strong>{categoryName}</strong>
                   </TableCell>
                   <TableCell align="center">
-                    
+                    {groupedItems[categoryName][0].category.disabled? "Disabled" : "Active"}
                     </TableCell>
+                    <TableCell align="center">
+                    <Button
+                                  variant="contained"
+                                  color={groupedItems[categoryName][0].category.disabled? "secondary" : "primary"}
+                                  onClick={() =>
+                                  console.log("Hello World")
+                                  }
+                                >
+                                  {groupedItems[categoryName][0].category.disabled?"Disable" : "Enable"}
+                                </Button>
+                        </TableCell>
 
                 </TableRow>
-
-                {/* Collapsible Rows for Items */}
                 <TableRow>
                   <TableCell
                     style={{ paddingBottom: 0, paddingTop: 0 }}

@@ -255,7 +255,7 @@ public class ItemJdbcRepository implements ItemRepository {
 
     private Category findCategory(Item item){
 
-        final String sql = "SELECT category_id, category_name FROM category WHERE category_id = ?;";
+        final String sql = "SELECT category_id, category_name, category_disabled FROM category WHERE category_id = ?;";
 
         return jdbcTemplate.query(sql, new CategoryMapper(), item.getCategory().getCategoryId()).stream().findFirst().orElse(null);
     }

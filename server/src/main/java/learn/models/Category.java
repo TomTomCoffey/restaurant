@@ -4,6 +4,7 @@ public class Category {
 
     private int categoryId;
     private String name;
+    private boolean disabled;
 
     public Category(){}
 
@@ -15,9 +16,18 @@ public class Category {
                 '}';
     }
 
-    public Category(int categoryId, String name) {
+    public Category(int categoryId, String name, boolean disabled) {
         this.categoryId = categoryId;
         this.name = name;
+        this.disabled = disabled;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 
     public int getCategoryId() {

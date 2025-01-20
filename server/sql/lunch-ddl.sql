@@ -19,7 +19,8 @@ create table app_user(
 
 create table category(
     category_id int primary key auto_increment,
-    category_name varchar(100) not null
+    category_name varchar(100) not null,
+    category_disabled boolean default false
 );
 
 create table item(

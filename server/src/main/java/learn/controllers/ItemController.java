@@ -1,6 +1,8 @@
 package learn.controllers;
+import learn.domain.CategoryService;
 import learn.domain.ItemService;
 import learn.domain.Result;
+import learn.models.Category;
 import learn.models.Item;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +16,13 @@ import java.util.List;
 public class ItemController {
 
     final ItemService service;
+    final CategoryService categoryService;
 
 
-    public ItemController(ItemService service) {
+
+    public ItemController(ItemService service, CategoryService categoryService) {
         this.service = service;
+        this.categoryService = categoryService;
     }
 
     @GetMapping
@@ -82,18 +87,24 @@ public class ItemController {
     @PutMapping("/category/enable/{id}")
     public ResponseEntity<Object> enableCategory(@PathVariable int id){
         Result<Item> result = service.enableCategory(id);
-        if(result.isSuccess()){
+        Result<Category> categoryResult = categoryService.enable(id);
+        if(result.isSuccess() && categoryResult.isSuccess()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return ErrorResponse.build(result);
+        if(!result.isSuccess()) return ErrorResponse.build(result);
+        return ErrorResponse.build(categoryResult);
     }
+
     @PutMapping("/category/disable/{id}")
     public ResponseEntity<Object> disableCategory(@PathVariable int id){
         Result<Item> result = service.disableCategory(id);
-        if(result.isSuccess()){
+        Result<Category> categoryResult = categoryService.disable(id);
+        if(result.isSuccess() && categoryResult.isSuccess()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        return ErrorResponse.build(result);
+        if(!result.isSuccess()) return ErrorResponse.build(result);
+
+        return ErrorResponse.build(categoryResult);
     }
 
     @PutMapping("/category/{id}/priceChange")

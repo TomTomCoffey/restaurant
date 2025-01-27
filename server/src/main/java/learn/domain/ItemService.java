@@ -189,8 +189,8 @@ public class ItemService {
             result.addMessage("Item must have a valid title", ResultType.INVALID);
         }
 
-        if(item.getDescription() == null || item.getDescription().isEmpty() || item.getDescription().isBlank()){
-            result.addMessage("Item must have a valid description", ResultType.INVALID);
+        if(item.getDescription() == null){
+            result.addMessage("Item must have a non null description", ResultType.INVALID);
         }
 
         if(item.getPrice().doubleValue() <= 0.00){

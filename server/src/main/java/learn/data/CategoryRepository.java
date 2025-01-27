@@ -12,5 +12,9 @@ public interface CategoryRepository {
 
     public boolean update(Category category);
 
+    public boolean disableCategory(Category category);
+
+    public boolean enableCategory(Category category);
+
     public boolean deletedById( int categoryId);
 }

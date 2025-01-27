@@ -56,39 +56,42 @@ function BusinessMetrics() {
             setItems(data.items[0]);
             setRevenue(data.revenue[0]);
           })
-          .then(() => {
-            const data = {
-              labels: revenue.map((r) => r.date),
-              datasets: [
-                {
-                  label: "Revenue",
-                  data: revenue.map((r) => r.revenue),
-                  borderColor: "#42A5F5",
-                  backgroundColor: "rgba(66, 165, 245, 0.2)",
-                },
-              ],
-            };
-            setChartData(data);
-            setTodaysRevenue(revenue[revenue.length - 1].revenue);
-            setWeeklyRevenue(revenue.slice(revenue.length - 7));
-          })
-          .then(() => {
-            const data = {
-              labels: weeklyRevenue.map((r) => r.date),
-              datasets: [
-                {
-                  label: "Revenue",
-                  data: weeklyRevenue.map((r) => r.revenue),
-                  borderColor: "#42A5F5",
-                  backgroundColor: "rgba(66, 165, 245, 0.2)",
-                },
-              ],
-            };
-            setWeeklyChartData(data);
-          })
           .catch((error) => console.error(error));
+      }, []);
+
+      useEffect(() => {
+        if (revenue.length > 0) {
+          const chartData = {
+            labels: revenue.map((r) => r.date),
+            datasets: [
+              {
+                label: "Revenue",
+                data: revenue.map((r) => r.revenue),
+                borderColor: "#42A5F5",
+                backgroundColor: "rgba(66, 165, 245, 0.2)",
+              },
+            ],
+          };
+          setChartData(chartData);
+      
+          const weeklyData = revenue.slice(-7);
+          const weeklyChartData = {
+            labels: weeklyData.map((r) => r.date),
+            datasets: [
+              {
+                label: "Weekly Revenue",
+                data: weeklyData.map((r) => r.revenue),
+                borderColor: "#66BB6A",
+                backgroundColor: "rgba(102, 187, 106, 0.2)",
+              },
+            ],
+          };
+          setWeeklyChartData(weeklyChartData);
+      
+          setTodaysRevenue(revenue[revenue.length - 1]?.revenue || 0);
+        }
       }, [revenue]);
-    
+      
 
 
   return (

@@ -71,7 +71,6 @@ function ItemTable() {
         if (response.ok) {
           // Handle success
           console.log('Category enabled successfully');
-          // Optionally, you can refresh the items or update the state here
         } else {
           // Handle error
           console.error('Failed to enable category');
@@ -92,7 +91,7 @@ function ItemTable() {
           if (response.ok) {
              // Handle success
              console.log('Category disabled successfully');
-             // Optionally, you can refresh the items or update the state here
+             ///this is where I should set the state of the category to disabled
           } else {
              // Handle error
              console.error('Failed to disable category');
@@ -103,11 +102,48 @@ function ItemTable() {
 
   const enableItem = (item) => {
     console.log(item);
+    fetch(`http://localhost:8080/api/item/id/${item.itemId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            ...item,
+            disabled: false,
+        }),
+        }).then((response) => {
+        if (response.ok) {
+            // Handle success
+            console.log('Item enabled successfully');
+        } else {
+            // Handle error
+            console.error('Failed to enable item');
+        }
+        }).catch((error) => console.error(error));
+
   };
 
   const disableItem = (item) => {
+    console.log(item);
+    fetch(`http://localhost:8080/api/item/id/${item.itemId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            ...item,
+            disabled: true,
+        }),
+        }).then((response) => {
+        if (response.ok) {
+            // Handle success
+            console.log('Item disabled successfully');
+        } else {
+            // Handle error
+            console.error('Failed to disable item');
+        }
+        }).catch((error) => console.error(error));
     
-        console.log(item);
 };
     
        
@@ -191,9 +227,7 @@ function ItemTable() {
                                   variant="contained"
                                   color={item.disabled? "primary": "secondary"}
                                   onClick={() =>
-                                    console.log(
-                                      `Toggle active state for ${item.title}`
-                                    )
+                                    item.disabled ? enableItem(item) : disableItem(item)
                                   }
                                 >
                                   {item.disabled ? "Enable" : "Disable"}

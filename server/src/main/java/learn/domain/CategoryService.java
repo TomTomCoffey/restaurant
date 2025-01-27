@@ -65,6 +65,45 @@ public class CategoryService {
 
     }
 
+    public Result<Category> enable(int id){
+        Result<Category> result = new Result<>();
+
+        Category c2 = findAll().stream()
+                .filter(i -> i.getCategoryId() == id)
+                .findFirst()
+                .orElse(null);
+
+        if(c2 == null){
+            result.addMessage("Category cannot be null", ResultType.INVALID);
+            return result;
+        }
+        boolean expected = repository.enableCategory(c2);
+        if(!expected){
+            result.addMessage("Category not found in database", ResultType.NOT_FOUND);
+        }
+        return result;
+
+    }
+
+    public Result<Category> disable(int id){
+        Result<Category> result = new Result<>();
+
+        Category c2 = findAll().stream()
+                .filter(i -> i.getCategoryId() == id)
+                .findFirst()
+                .orElse(null);
+
+        if(c2 == null){
+            result.addMessage("Category cannot be null", ResultType.INVALID);
+            return result;
+        }
+        boolean expected = repository.disableCategory(c2);
+        if(!expected){
+            result.addMessage("Category not found in database", ResultType.NOT_FOUND);
+        }
+        return result;
+    }
+
     public Result<Category> update(Category category){
         Result<Category> result = new Result<>();
 

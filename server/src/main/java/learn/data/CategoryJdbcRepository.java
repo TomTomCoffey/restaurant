@@ -60,6 +60,23 @@ public class CategoryJdbcRepository implements CategoryRepository {
     }
 
     @Override
+    public boolean disableCategory(Category category) {
+        final String sql = "UPDATE category set category_disabled = true WHERE category_id = ?";
+        return jdbcTemplate.update(sql,
+                category.getCategoryId()
+        ) > 0;
+    }
+
+    @Override
+    public boolean enableCategory(Category category) {
+        final String sql = "UPDATE category set category_disabled = false WHERE category_id = ?";
+        return jdbcTemplate.update(sql,
+                category.getCategoryId()
+        ) > 0;
+    }
+
+
+    @Override
     public boolean deletedById(int categoryId) {
         return jdbcTemplate.update("DELETE FROM category WHERE category_id = ? ;", categoryId) > 0;
     }

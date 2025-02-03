@@ -8,6 +8,7 @@ import {
 
 import BusinessMetrics from "../components/BusinessMetrics";
 import ItemTable from "../components/ItemTable";
+import NewItemForm from "../components/NewItemForm";
 
 
 function Home() {
@@ -41,7 +42,7 @@ function Home() {
 
         {value === "one" && <BusinessMetrics />}
         {value === "two" && <ItemTable />}
-        {value === "three" && <h1>Add New Item</h1>}
+        {value === "three" && <h1><NewItemForm/></h1>}
         {value === "four" && <h1>Edit Item</h1>}
         {value === "five" && <h1>Delete Item</h1>}
         {value === "six" && <h1>Add Modifier</h1>}

@@ -16,6 +16,8 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 function ItemTable() {
   const [items, setItems] = useState([]);
   const [openCategories, setOpenCategories] = useState({});
+  const [itemState, setItemState] = useState({});
+ const [categoryState, setCategoryState] = useState({});
 
   // Fetch items from API
   useEffect(() => {
@@ -29,6 +31,12 @@ function ItemTable() {
       .then((data) => {
         setItems(data);
         console.log(data);
+        for (let i = 0; i < data.length; i++) {
+          setItemState((prev) => ({
+            ...prev,
+            [data[i].itemId]: data[i].disabled,
+          }));
+        }
       })
       .catch((error) => console.error(error));
      
@@ -43,6 +51,10 @@ function ItemTable() {
         groupedItems[item.category.name] = [];
       }
       groupedItems[item.category.name].push(item);
+      setCategoryState((prev) => ({
+        ...prev,
+        [item.category.categoryId]: item.category.disabled,
+        }));
     });
     return groupedItems;
   };
@@ -60,6 +72,7 @@ function ItemTable() {
   };
 
   const enableCategory = (categoryId) =>{
+    console.log(categoryState);
     console.log(categoryId);
     fetch(`http://localhost:8080/api/item/category/enable/${categoryId}`, {
       method: 'PUT',
@@ -71,6 +84,10 @@ function ItemTable() {
         if (response.ok) {
           // Handle success
           console.log('Category enabled successfully');
+          setCategoryState((prev) => ({
+            ...prev,
+            [categoryId]: false,
+            }));
         } else {
           // Handle error
           console.error('Failed to enable category');
@@ -80,6 +97,7 @@ function ItemTable() {
 
   const disableCategory = (categoryId) => {
     console.log(categoryId);
+    console.log(categoryState);
     fetch(`http://localhost:8080/api/item/category/disable/${categoryId}`, {
             
         method: 'PUT',
@@ -91,7 +109,12 @@ function ItemTable() {
           if (response.ok) {
              // Handle success
              console.log('Category disabled successfully');
-             ///this is where I should set the state of the category to disabled
+                setCategoryState((prev) => ({
+                ...prev,
+                [categoryId]: true,
+                }));
+
+            
           } else {
              // Handle error
              console.error('Failed to disable category');
@@ -115,6 +138,10 @@ function ItemTable() {
         if (response.ok) {
             // Handle success
             console.log('Item enabled successfully');
+            setItemState((prev) => ({
+                ...prev,
+                [item.itemId]: false,
+                }));
         } else {
             // Handle error
             console.error('Failed to enable item');
@@ -138,6 +165,10 @@ function ItemTable() {
         if (response.ok) {
             // Handle success
             console.log('Item disabled successfully');
+            setItemState((prev) => ({
+                ...prev,
+                [item.itemId]: true,
+                }));
         } else {
             // Handle error
             console.error('Failed to disable item');
@@ -186,18 +217,18 @@ function ItemTable() {
                     <strong>{categoryName}</strong>
                   </TableCell>
                   <TableCell align="center">
-                    <strong>{groupedItems[categoryName][0].category.disabled? "Disabled" : "Active"}</strong>
+                    <strong>{categoryState[groupedItems[categoryName][0].category.categoryId]? "Disabled" : "Active"}</strong>
                     </TableCell>
                     <TableCell align="center">
                     <Button
                                   variant="contained"
-                                  color={groupedItems[categoryName][0].category.disabled? "primary" : "secondary"}
+                                  color={categoryState[groupedItems[categoryName][0].category.categoryId]? "primary" : "secondary"}
                                   onClick={() => {       
-                                    groupedItems[categoryName][0].category.disabled? enableCategory(groupedItems[categoryName][0].category.categoryId) : disableCategory(groupedItems[categoryName][0].category.categoryId)
+                                    categoryState[groupedItems[categoryName][0].category.categoryId]? enableCategory(groupedItems[categoryName][0].category.categoryId) : disableCategory(groupedItems[categoryName][0].category.categoryId)
                                }
                                }
                                 >
-                                  {groupedItems[categoryName][0].category.disabled?"Enable" : "Disable"}
+                                  {categoryState[groupedItems[categoryName][0].category.categoryId]?"Enable" : "Disable"}
                                 
                                 </Button>
                         </TableCell>
@@ -220,17 +251,17 @@ function ItemTable() {
                               <TableCell />
                               <TableCell>{item.title}</TableCell>
                               <TableCell align="center">
-                                {item.disabled? "Disabled" : "Active"}
+                                {itemState[item.itemId]? "Disabled" : "Active"}
                               </TableCell>
                               <TableCell align="center">
                                 <Button
                                   variant="contained"
-                                  color={item.disabled? "primary": "secondary"}
+                                  color={itemState[item.itemId]? "primary": "secondary"}
                                   onClick={() =>
-                                    item.disabled ? enableItem(item) : disableItem(item)
+                                    itemState[item.itemId] ? enableItem(item) : disableItem(item)
                                   }
                                 >
-                                  {item.disabled ? "Enable" : "Disable"}
+                                  {itemState[item.itemId] ? "Enable" : "Disable"}
                                 </Button>
                               </TableCell>
                             </TableRow>

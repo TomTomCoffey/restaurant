@@ -1,5 +1,7 @@
 import { Container, FormGroup, TextField, Select, MenuItem, Autocomplete, Chip, Button } from "@mui/material";
 import { useState, useEffect } from "react";
+import axios from 'axios';
+import { toast } from "react-toastify";
 
 const dummyItem = {
     itemId: 0,
@@ -17,18 +19,42 @@ function NewItemForm() {
     const [selectedModifiers, setSelectedModifiers] = useState([]);
     const [item, setItem] = useState(dummyItem);
 
+
+    const handleChange = (event) => {
+        const {name, value} = event.target;
+
+        setItem(prevItem => ({
+            ...prevItem,
+            [name]: value
+        }))
+
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try{
+         const newItem = {...item, modifiers:selectedModifiers}   
+        const response = await axios.post('http://localhost:8080/api/item', newItem);
+        if(response.status === 201){
+            toast.success("New Item added to Menu");
+        }
+      
+        }catch(error){
+            if(error.response){
+            const errors = error.response.data;
+            for(let i = 0; i < errors.length; i++){
+                toast.error(errors[i]);
+            }
+        }
+        }    
+    }
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/category');
-                if (response.ok) {
-                    const data = await response.json();
-                    setCategories(data);
-                } else {
-                    console.error('Failed to fetch categories');
-                }
+                const response = await axios.get('http://localhost:8080/api/category');
+                    setCategories(response.data);
             } catch (error) {
-                console.error('Error fetching categories:', error);
+                toast.error(error);
             }
         };
         fetchCategories();
@@ -37,15 +63,10 @@ function NewItemForm() {
     useEffect(() => {
         const fetchModifiers = async () => {
             try {
-                const response = await fetch('http://localhost:8080/api/modifiers');
-                if (response.ok) {
-                    const data = await response.json();
-                    setModifiers(data);
-                } else {
-                    console.error('Failed to fetch modifiers');
-                }
+                const response = await axios.get('http://localhost:8080/api/modifiers');   
+                    setModifiers(response.data);
             } catch (error) {
-                console.error('Error fetching modifiers:', error);
+                toast.error(error);
             }
         };
         fetchModifiers();
@@ -53,24 +74,26 @@ function NewItemForm() {
 
     return (
         <>
-            <h1>Add a New Item</h1>
             <Container maxWidth="sm">
                 <form>
-                    <FormGroup sx={{ marginBottom: 2 }}>
-                        <TextField label="Item Name" fullWidth />
+                    <FormGroup sx={{ marginBottom: 2, marginTop: 6 }}>
+                        <TextField label="Item Name" fullWidth name='title'value={item.title} onChange={handleChange}/>
                     </FormGroup>
 
                     <FormGroup sx={{ marginBottom: 2 }}>
-                        <TextField label="Description" multiline fullWidth />
+                        <TextField label="Description" multiline fullWidth name='description' value={item.description} onChange={handleChange}/>
                     </FormGroup>
 
                     <FormGroup sx={{ marginBottom: 2 }}>
-                        <TextField type="number" label="Price" fullWidth />
+                        <TextField type="number" label="Price" fullWidth name='price' value={item.price}onChange={handleChange}/>
                     </FormGroup>
 
                     <FormGroup sx={{ marginBottom: 2 }}>
-                        <Select displayEmpty fullWidth>
-                            <MenuItem value="" disabled>Select Category</MenuItem>
+                        <Select displayEmpty fullWidth 
+                                name="category"
+                                value={item.category || ""}
+                                 onChange={handleChange}>
+                            <MenuItem value="None" disabled>Select Category</MenuItem>
                             {categories.map((category, index) => (
                                 <MenuItem key={index} value={category}>{category.name}</MenuItem>
                             ))}
@@ -97,9 +120,8 @@ function NewItemForm() {
                             sx={{ width: "100%" }}
                         />
                     </FormGroup>
-
                     <FormGroup sx={{ marginBottom: 2 }}>
-                        <Button color="primary">Submit</Button>
+                        <Button variant="outlined" color="primary" type='submit' onClick={handleSubmit}>Submit</Button>
                     </FormGroup>
                 </form>
             </Container>

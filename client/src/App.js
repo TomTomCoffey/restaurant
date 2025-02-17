@@ -8,10 +8,14 @@ import Signup from './pages/Signup';
 import Menu from './pages/Menu';
 import NavBar from './components/NavBar';
 import Order from './pages/Order';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
    <>
+   <ToastContainer position="top-right" autoClose={3000} />
     <UserProvider>
       <CartProvider>
     <Router>

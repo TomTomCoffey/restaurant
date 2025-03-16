@@ -21,28 +21,23 @@ function EditDeleteItemTable(){
     },[])
 
 
-    const deleteItem = (item) => {
+    const deleteItem = async (item) => {
 
-        alert("Are you sure you want to delete this item?");
+        const isConfirmed = window.confirm("Are you sure you want to delete this item?");
 
-        if(checker){
+        if(isConfirmed){
+            console.log(item.itemId);
             try{
-                const response = axios.delete(`http://localhost:8080/api/item/${item.itemmId}`);
+                const response = await axios.delete(`http://localhost:8080/api/item/${item.itemId}`);
                 if(response.status === 204){
                     toast.success(`${item.title} was successfully deleted`);
-                    const newItemList = items.filter(i => i.itemId !== item.itemId);
-                    setItems(newItemList);
-                    setChecker(false);
+                    setItems(items.filter(i => i.itemId !== item.itemId));
                 }
             }catch(error){
                 toast.error(error);
-                setChecker(false);
-            }
-      
             
+            } 
         }
-
-        
     }
 
 

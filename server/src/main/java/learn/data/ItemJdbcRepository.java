@@ -195,6 +195,18 @@ public class ItemJdbcRepository implements ItemRepository {
     @Override
     @Transactional
     public boolean deletebyID(int itemId) {
+
+        Item item = findById(itemId);
+
+        for(Modifiers m : item.getModifiers()){
+            try {
+                deleteSubModifiers(itemId, m.getModifier_id());  ///remove the submodifiers listed.
+            }
+            catch(Error e){
+                System.out.println(e);
+            }
+        }
+
         return jdbcTemplate.update("DELETE FROM item where item_id = ? ;", itemId) > 0;
     }
 

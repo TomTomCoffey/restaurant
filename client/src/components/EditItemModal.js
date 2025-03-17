@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 
-function EditItemModal({oldItem}){
+function EditItemModal({oldItem, setItems, oldItems, handleClose}){
 
         const [categories, setCategories] = useState([]);
         const [modifiers, setModifiers] = useState([]);
@@ -30,7 +30,10 @@ function EditItemModal({oldItem}){
              const newItem = {...item, modifiers:selectedModifiers}   
             const response = await axios.put(`http://localhost:8080/api/item/id/${item.itemId}`, newItem);
             if(response.status === 204){
+                setItems(oldItems.map(i => i.itemId === item.itemId ? newItem : i));
                 toast.success("Changes successfully Made");
+                handleClose();
+                
             }
           
             }catch(error){

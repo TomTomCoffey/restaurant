@@ -33,7 +33,6 @@ function Home() {
             <Tab value="two" label="86'd Items" />
             <Tab value="three" label="Add New Item" />
             <Tab value="four" label="Edit/Delete Item" />
-            <Tab value="five" label="Delete Item" />
             <Tab value="six" label="Add Modifier" />
             <Tab value="seven" label="Edit Modifier" />
             <Tab value="eight" label="Delete Modifier" />
@@ -44,7 +43,6 @@ function Home() {
         {value === "two" && <ItemTable />}
         {value === "three" && <h1><NewItemForm/></h1>}
         {value === "four" && <EditDeleteItemTable/>}
-        {value === "five" && <h1>Delete Item</h1>}
         {value === "six" && <h1>Add Modifier</h1>}
         {value === "seven" && <h1>Edit Modifier</h1>}
         {value === "eight" && <h1>Delete Modifier</h1>}

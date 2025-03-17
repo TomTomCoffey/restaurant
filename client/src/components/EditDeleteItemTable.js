@@ -61,8 +61,9 @@ function EditDeleteItemTable() {
 
   const openEditItemModal = (item) => {
     setItem(item);
-    handleOpen();
+    handleOpen();  ///now i need to figure out how to maintain state for when the new item is updated , duh I figured it out lol
   };
+///also i need the modal to be responsive and not cut out when its too big 
 
   return (
     <>
@@ -89,7 +90,7 @@ function EditDeleteItemTable() {
               borderRadius: 2,
             }}
           >
-            <EditItemModal oldItem={item}></EditItemModal>
+            <EditItemModal oldItem={item} setItems={setItems} oldItems={items} handleClose={handleClose}></EditItemModal>
           </Box>
         </Modal>
         <Table>
@@ -119,7 +120,7 @@ function EditDeleteItemTable() {
                 </TableCell>
                 <TableCell>
                   <Button
-                    varient="outlined"
+                    variant="outlined"
                     color="error"
                     onClick={() => deleteItem(item)}
                   >

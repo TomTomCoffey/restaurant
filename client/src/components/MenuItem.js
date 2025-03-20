@@ -4,6 +4,7 @@ import { UserContext } from "../context/UserContext";
 import { useState } from "react";
 import Menu from "../pages/Menu";
 import MenuItemModal from "./MenuItemModal";
+import { Button , Card, CardContent, Box, Typography} from "@mui/material";
 
 function MenuItem({ item }) {
 
@@ -22,20 +23,23 @@ function MenuItem({ item }) {
     const truncated = item.description.length > 50 ? item.description.substring(0, 50) + '...' : item.description;
     return (
         <>
-        <MenuItemModal item={item} isOpen={isModalOpen} onClose={closeModal} />
-        <div className="menu-item">
-            {/* <img src={item.image} alt={item.title} className="menu-item-image" />  i dont need to worry about this just yet*/}
-            <div className="menu-item-info">
-                <div className="menu-words">
-                <h2 className="menu-item-title">{item.title}</h2>
-                <p className="menu-item-description">{truncated}</p>
-                </div>
-                <div className="menu-words">
-                <p className="menu-item-price">${item.price.toFixed(2)}</p>
-                <button className="menu-item-button"onClick={openModal}><strong>Add to Cart</strong></button>
-                </div>
-            </div>
-        </div>
+<MenuItemModal item={item} isOpen={isModalOpen} onClose={closeModal} />
+            <Card sx={{ maxWidth: 345, m: 2, p: 2, display: "flex", flexDirection: "column" }}>
+                <CardContent>
+                    <Typography variant="h6" component="h2" gutterBottom>
+                        {item.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary" noWrap>
+                        {item.description}
+                    </Typography>
+                    <Box display="flex" justifyContent="space-between" alignItems="center" mt={2}>
+                        <Typography variant="h6">${item.price.toFixed(2)}</Typography>
+                        <Button variant="contained" onClick={openModal}>
+                            <strong>Add to Cart</strong>
+                        </Button>
+                    </Box>
+                </CardContent>
+            </Card>
         </>
     );
 }

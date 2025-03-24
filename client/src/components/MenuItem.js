@@ -4,7 +4,8 @@ import { UserContext } from "../context/UserContext";
 import { useState } from "react";
 import Menu from "../pages/Menu";
 import MenuItemModal from "./MenuItemModal";
-import { Button , Card, CardContent, Box, Typography} from "@mui/material";
+import { Button , Card, CardContent, Box, Typography, Modal} from "@mui/material";
+import UpdatedMenuItemModal from "./UpdatedMenuItemModal";
 
 function MenuItem({ item }) {
 
@@ -23,7 +24,31 @@ function MenuItem({ item }) {
     const truncated = item.description.length > 50 ? item.description.substring(0, 50) + '...' : item.description;
     return (
         <>
-<MenuItemModal item={item} isOpen={isModalOpen} onClose={closeModal} />
+{/* <MenuItemModal item={item} isOpen={isModalOpen} onClose={closeModal} /> */}
+            <Modal
+                open={isModalOpen}
+                onClose={closeModal}
+                aria-labelledby="child-modal-title"
+                aria-describedby="child-modal-description"
+                scrollBehavior="auto">
+                <Box
+                sx={{
+                    position: "absolute",
+                    scrollBehavior: "auto",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    width: 600,
+                    bgcolor: "background.paper",
+                    border: "2px solid #000",
+                    boxShadow: 24,
+                    p: 4,
+                    borderRadius: 2,
+                  }}>
+                <UpdatedMenuItemModal item={item} isOpen={isModalOpen} onClose={closeModal} ></UpdatedMenuItemModal>
+                </Box>
+
+            </Modal>
             <Card sx={{ maxWidth: 345, m: 2, p: 2, display: "flex", flexDirection: "column" }}>
                 <CardContent>
                     <Typography variant="h6" component="h2" gutterBottom>

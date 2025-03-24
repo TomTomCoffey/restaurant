@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { CartContext } from "../context/CartContext";
-import { Modal } from "@mui/material";
+import { Card, CardActions, CardContent, CardHeader, Modal, Typography, Button } from "@mui/material";
 
 function UpdatedMenuItemModal({ item, isOpen, onClose }) {
     const [price, setPrice] = useState(item.price);
@@ -102,6 +102,55 @@ function UpdatedMenuItemModal({ item, isOpen, onClose }) {
     }
 return(
     <>
+        <Card>
+            <CardHeader>
+                <CardContent>
+            <Typography>{item.title}</Typography>
+            <Typography>Total ${total.toFixed(2)}</Typography>  
+            </CardContent> 
+            </CardHeader>
+            <CardContent>
+            <Typography>{item.title}</Typography>
+            <Typography>Total ${total.toFixed(2)}</Typography>   
+                <Typography>{item.description}</Typography>
+                {Object.keys(groupModifiers).map(categoryName => {
+                    const category = groupModifiers[categoryName];
+                    return (
+                        <div key={categoryName} className="menu-modifiers">
+                              <h4 className={`modifier-category ${category.required ? 'required' : ''}`}>{categoryName}</h4>
+                                    {category.modifiers.map(modifier => (
+                                        <div key={modifier.modifier_id} className="modifier-option" onClick={clickInput}>
+                                            <input
+                                                type={category.required ? "radio" : "checkbox"}
+                                                name={categoryName}
+                                                id={modifier.modifier_id}
+                                                onChange={(e) => handleModifierChange(e, modifier, category)}
+                                            />
+                                            <label htmlFor={modifier.modifier_id}>{modifier.name} (+${modifier.price.toFixed(2)})</label>
+                                 </div>
+                             ))}
+                        </div>                
+                    )
+                })}
+            </CardContent>
+            <CardActions
+            >
+            <div className="modal-footer">
+                        <div className="quantity-control">
+                          <Button onClick={() => updateQuantity({ target: { value: quantity - 1 } })}>-</Button>
+                          <Typography>{ quantity } </Typography>
+                          <Button onClick={() => updateQuantity({ target: { value: quantity + 1 } })}>+</Button>
+                         </div>
+                 <div className="total-amount">
+                      <Typography> Total: ${total.toFixed(2)} </Typography>
+                 </div>
+                 <div className="button-container">
+                  <Button variant="contained" color="error" onClick={closeModel}> Cancel </Button>
+                  <Button variant="contained" color="primary" onClick={add}>Add to Cart</Button>
+                </div>
+                </div>
+            </CardActions>
+        </Card>
     
 
     </>

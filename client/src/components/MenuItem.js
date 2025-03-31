@@ -24,8 +24,8 @@ function MenuItem({ item }) {
     const truncated = item.description.length > 50 ? item.description.substring(0, 50) + '...' : item.description;
     return (
         <>
-{/* <MenuItemModal item={item} isOpen={isModalOpen} onClose={closeModal} /> */}
-            <Modal
+<MenuItemModal item={item} isOpen={isModalOpen} onClose={closeModal} />
+            {/* <Modal
                 open={isModalOpen}
                 onClose={closeModal}
                 aria-labelledby="child-modal-title"
@@ -46,9 +46,9 @@ function MenuItem({ item }) {
                     borderRadius: 2,
                   }}>
                 <UpdatedMenuItemModal item={item} isOpen={isModalOpen} onClose={closeModal} ></UpdatedMenuItemModal>
-                </Box>
+                </Box> */}
 
-            </Modal>
+            {/* </Modal> */}
             <Card sx={{ maxWidth: 345, m: 2, p: 2, display: "flex", flexDirection: "column" }}>
                 <CardContent>
                     <Typography variant="h6" component="h2" gutterBottom>

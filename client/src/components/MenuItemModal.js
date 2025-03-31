@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { CartContext } from "../context/CartContext";
 import "./MenuItemModal.css";
+import { Button } from "@mui/material";
+import { toast } from "react-toastify";
 
 function MenuItemModal({ item, isOpen, onClose }) {
     const [price, setPrice] = useState(item.price);
@@ -28,7 +30,7 @@ function MenuItemModal({ item, isOpen, onClose }) {
 
     const groupModifiers = groupByModifierCategory(item);
     const handleModifierChange = (e, modifier, category) => {
-        const modifierPriceChange = e.target.checked ? modifier.price : -modifier.price;
+    const modifierPriceChange = e.target.checked ? modifier.price : -modifier.price;
 
         if (category.required) {
             if (e.target.checked) {
@@ -71,14 +73,22 @@ function MenuItemModal({ item, isOpen, onClose }) {
         };
         console.log(order);
         addToCart(order);
-        console.log(cart);
+        toast.success(order.item + " added to cart!");
         onClose();
     };
 
     const updateQuantity = (e) => {
         const newQuantity = parseInt(e.target.value);
+
+        if(newQuantity > 0){
         setQuantity(newQuantity);
         setTotal(price * newQuantity);
+    }
+        else{
+            toast.error("You must have at least one item");
+        }
+
+
     };
 
     const clickInput = (e) => {
@@ -102,9 +112,10 @@ function MenuItemModal({ item, isOpen, onClose }) {
     }
 
     return (
+        <div className="modal-backdrop" onClick={closeModel}>
         <div className="modal show" tabIndex="-1" role="dialog" style={{ display: 'block' }}>
             <div className="modal-dialog" role="document">
-                <div className="modal-content">
+                <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                     <div className="modal-header">
                         <h5 className="modal-title">{item.title}</h5>
                         <h5 className="modal-title">Total: ${total.toFixed(2)}</h5>
@@ -133,20 +144,21 @@ function MenuItemModal({ item, isOpen, onClose }) {
                     </div>
                     <div className="modal-footer">
                         <div className="quantity-control">
-                          <button  className="quantity-button"onClick={() => updateQuantity({ target: { value: quantity - 1 } })}>-</button>
+                          <Button size="small" onClick={() => updateQuantity({ target: { value: quantity - 1 } })}>-</Button>
                           <h5> { quantity } </h5>
-                          <button className="quantity-button"onClick={() => updateQuantity({ target: { value: quantity + 1 } })}>+</button>
+                          <Button size="small" onClick={() => updateQuantity({ target: { value: quantity + 1 } })}>+</Button>
                          </div>
                  <div className="total-amount">
                         Total: ${total.toFixed(2)}
                  </div>
                  <div className="button-container">
-                  <button type="button" className="btn btn-secondary" id=""  onClick={closeModel}>Cancel</button>
-                  <button type="button" className="btn btn-primary" id="btn" onClick={add}>Add to Cart</button>
+                   <Button variant="contained"  onClick={closeModel}>Cancel</Button>
+                   <Button variant="contained"  onClick={add}>Add to Cart</Button>
                 </div>
                 </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

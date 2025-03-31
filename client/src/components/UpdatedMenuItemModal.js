@@ -133,8 +133,7 @@ return(
                     )
                 })}
             </CardContent>
-            <CardActions
-            >
+            <CardActions>
             <div className="modal-footer">
                         <div className="quantity-control">
                           <Button onClick={() => updateQuantity({ target: { value: quantity - 1 } })}>-</Button>
@@ -150,6 +149,7 @@ return(
                 </div>
                 </div>
             </CardActions>
+            
         </Card>
     
 

@@ -1,3 +1,45 @@
-# https://www.robotstxt.org/robotstxt.html
-User-agent: *
-Disallow:
+Docusign Notes:
+
+poeple own have access to their own agreements in navigator
+
+if its been added to an agreement set they are apart of 
+
+permisson sets to see who can see the agreements 
+______
+Search for agreements ?
+
+we can use search by name 
+Docusign search can use AND boolean 
+
+
+
+Renewal management 
+
+scheduled reports sent to clients on recurring basis 
+
+
+
+______________-
+Docusign IAM succcess starts with admins talk
+
+
+Shjare purchase agreement subsets with admin on all docusign accounts 
+
+
+
+__________________-
+Integrate DocuSign IAM with salesforce 
+
+with esignature with salesforce 
+end to end agreement automation with Maetros 
+
+
+
+can I get data using apex to get data for document generation
+
+doccusign build workflows class 
+
+-- Certs are currently free 
+
+
+* 

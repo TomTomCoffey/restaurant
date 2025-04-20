@@ -10,6 +10,8 @@ import NavBar from './components/NavBar';
 import Order from './pages/Order';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Admin from './pages/Admin';
+import Cart from './pages/Cart';
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/menu" element={<Menu/>}/>
         <Route path="/order" element={<Order/>}/>
+        <Route path="/admin" element={<Admin/>}></Route>
+        <Route path="/cart" element={<Cart/>}></Route>
       </Routes>
     </Router>
     </CartProvider>

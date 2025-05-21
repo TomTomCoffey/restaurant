@@ -1,7 +1,9 @@
 package learn.data;
 
+import learn.data.mappers.ModifiersCategoryMapper;
 import learn.data.mappers.ModifiersMapper;
 import learn.models.Modifiers;
+import learn.models.ModifiersCategory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -50,8 +52,8 @@ public class ModifiersJdbcRepository implements ModifiersRepository {
 
     @Override
     public Modifiers add(Modifiers modifiers) {
-        final String sql = "INSERT INTO modifiers(modifier_name, modifier_price, modifier_disabled)" +
-                " values(?, ?, ? );";
+        final String sql = "INSERT INTO modifiers(modifier_name, modifier_price, modifier_disabled, category_modifiers_id)" +
+                " values(?, ?, ?, ? );";
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
@@ -59,6 +61,7 @@ public class ModifiersJdbcRepository implements ModifiersRepository {
             ps.setString(1, modifiers.getName());
             ps.setBigDecimal(2, modifiers.getPrice());
             ps.setBoolean(3, modifiers.isDisabled());
+            ps.setInt(4, modifiers.getModifiersCategory().getId());
             return ps;
 
 
@@ -79,14 +82,31 @@ public class ModifiersJdbcRepository implements ModifiersRepository {
                 " modifier_name = ?, " +
                 " modifier_price = ?, " +
                 " modifier_disabled = ? " +
+                "category_modifiers_id = ?" +
                 " WHERE modifier_id = ?; ";
 
          return jdbcTemplate.update(sql, modifiers.getName(),
-                 modifiers.getPrice().doubleValue(), modifiers.isDisabled(), modifiers.getModifier_id()) > 0;
+                 modifiers.getPrice().doubleValue(), modifiers.isDisabled(), modifiers.getModifier_id(), modifiers.getModifiersCategory().getId()) > 0;
     }
 
     @Override
     public boolean deleteById(int modifiersId) {
         return jdbcTemplate.update("DELETE FROM modifiers WHERE modifier_id = ?;", modifiersId) > 0;
+    }
+
+    @Override
+    public ModifiersCategory getModifierCategory(int id){
+        return null;
+    }
+
+    @Override
+    public List<ModifiersCategory> getAllModCat(){
+        String sql = "SELECT " +
+                " category_modifiers_id, " +
+                " category_modifiers_title, " +
+                " category_modifiers_required " +
+                " FROM category_modifiers;";
+
+        return  jdbcTemplate.query(sql, new ModifiersCategoryMapper());
     }
 }

@@ -3,6 +3,7 @@ package learn.controllers;
 import learn.domain.ModifiersService;
 import learn.domain.Result;
 import learn.models.Modifiers;
+import learn.models.ModifiersCategory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,12 @@ public class ModifiersController {
     @GetMapping
     public List<Modifiers> findAll(){
         return service.findAll();
+    }
+
+    @GetMapping("/category")
+    public List<ModifiersCategory> getAllCatMod(){
+        return service.getAllCatMod();
+
     }
 
    @GetMapping("/item/{id}")

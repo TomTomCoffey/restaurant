@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../context/UserContext";
 import { CartContext } from "../context/CartContext";
 import "./MenuItemModal.css";
 import { Button } from "@mui/material";
@@ -10,9 +9,8 @@ function MenuItemModal({ item, isOpen, onClose }) {
     const [quantity, setQuantity] = useState(1);
     const [total, setTotal] = useState(price);
     const [modifiers, setModifiers] = useState([]);
-    const { user } = useContext(UserContext);
     const { addToCart } = useContext(CartContext);
-    const { cart } = useContext(CartContext);
+
 
     const groupByModifierCategory = (item) => {
         const groupedModifiers = {};

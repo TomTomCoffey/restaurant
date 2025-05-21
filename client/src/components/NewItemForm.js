@@ -33,7 +33,7 @@ function NewItemForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try{
-         const newItem = {...item, modifiers:selectedModifiers}   
+        const newItem = {...item, modifiers:selectedModifiers}   
         const response = await axios.post('http://localhost:8080/api/item', newItem);
         if(response.status === 201){
             toast.success("New Item added to Menu");

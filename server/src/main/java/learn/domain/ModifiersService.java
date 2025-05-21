@@ -2,6 +2,7 @@ package learn.domain;
 
 import learn.data.ModifiersRepository;
 import learn.models.Modifiers;
+import learn.models.ModifiersCategory;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Modifier;
@@ -18,6 +19,10 @@ public class ModifiersService {
 
     public List<Modifiers> findAll(){
         return repository.findAll();
+    }
+
+    public List<ModifiersCategory> getAllCatMod(){
+        return repository.getAllModCat();
     }
 
     public List<Modifiers> findByItemId(int itemId){

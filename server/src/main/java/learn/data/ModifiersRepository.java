@@ -1,6 +1,7 @@
 package learn.data;
 
 import learn.models.Modifiers;
+import learn.models.ModifiersCategory;
 
 import java.util.List;
 
@@ -15,4 +16,8 @@ public interface ModifiersRepository {
     public boolean update(Modifiers modifiers);
 
     public boolean deleteById(int modifiersId);
+
+    public ModifiersCategory getModifierCategory(int id);
+
+    public List<ModifiersCategory> getAllModCat();
 }
